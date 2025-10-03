@@ -1,0 +1,47 @@
+name: 🌐 Build Public Pages (Directory, FAQ, Help)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'schema-files/**'   # Only run when schema files change
+  workflow_dispatch:         # Allow manual run
+
+permissions:
+  contents: write
+
+jobs:
+  build-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 📦 Install Dependencies
+        run: |
+          pip install PyYAML
+
+      - name: 🏗️ Build Public HTML Pages
+        run: |
+          python build_public_pages.py
+
+      - name: 💾 Commit Generated Pages (if changed)
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html faqs.html help.html 2>/dev/null || echo "⚠️ Some pages not generated — continuing"
+          if ! git diff --cached --quiet; then
+            git commit -m "🌐 Auto-build public pages [$(date +'%Y-%m-%d')]"
+            git push origin main
+            echo "✅ Pages committed and pushed"
+          else
+            echo "✅ No changes to pages — nothing to commit"
+          fi
