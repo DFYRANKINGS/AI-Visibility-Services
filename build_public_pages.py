@@ -2,129 +2,264 @@
 import os
 import yaml
 import json
-
-def load_yaml(filepath):
-    with open(filepath, 'r', encoding='utf-8') as f:
-        return yaml.safe_load(f)
-
-def load_json(filepath):
-    with open(filepath, 'r', encoding='utf-8') as f:
-        return json.load(f)
+import re
+from datetime import datetime
 
 def escape_html(text):
+    if not isinstance(text, str):
+        return ""
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
-def generate_index_page():
-    """Generate simple directory listing"""
-    links = []
-    base_url = "https://raw.githubusercontent.com/DFYRANKINGS/diditan-group-ai-data/main"
+def slugify(text):
+    """Generate URL-friendly slug from text"""
+    if not text:
+        return "item"
+    text = re.sub(r'[^a-zA-Z0-9\s-]', '', str(text))
+    text = re.sub(r'[\s]+', '-', text.strip().lower())
+    return text or "item"
 
+def load_data(filepath):
+    if not os.path.exists(filepath):
+        return []
+    with open(filepath, 'r', encoding='utf-8') as f:
+        if filepath.endswith('.yaml'):
+            return yaml.safe_load(f) or []
+        elif filepath.endswith('.json'):
+            return json.load(f) or []
+    return []
+
+def generate_nav():
+    return """
+    <nav style="background: #2c3e50; padding: 1rem; margin-bottom: 2rem;">
+        <ul style="list-style: none; display: flex; gap: 2rem; margin: 0; padding: 0; flex-wrap: wrap; justify-content: center;">
+            <li><a href="index.html" style="color: white; text-decoration: none;">Home</a></li>
+            <li><a href="about.html" style="color: white; text-decoration: none;">About</a></li>
+            <li><a href="services.html" style="color: white; text-decoration: none;">Services</a></li>
+            <li><a href="testimonials.html" style="color: white; text-decoration: none;">Testimonials</a></li>
+            <li><a href="faqs.html" style="color: white; text-decoration: none;">FAQs</a></li>
+            <li><a href="help.html" style="color: white; text-decoration: none;">Help</a></li>
+            <li><a href="contact.html" style="color: white; text-decoration: none;">Contact</a></li>
+        </ul>
+    </nav>
+    """
+
+def generate_page(title, content):
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{escape_html(title)}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {{ font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.7; }}
+        h1, h2, h3 {{ color: #2c3e50; }}
+        a {{ color: #3498db; text-decoration: none; }}
+        a:hover {{ text-decoration: underline; }}
+        img {{ max-width: 100%; height: auto; }}
+        .page-header {{ background: #ecf0f1; padding: 2rem; border-radius: 8px; margin-bottom: 2rem; text-align: center; }}
+        .card {{ border: 1px solid #eee; padding: 1.5rem; border-radius: 8px; margin: 2rem 0; }}
+        .badge {{ background: #3498db; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.9em; }}
+    </style>
+</head>
+<body>
+    {generate_nav()}
+    <div class="page-header">
+        <h1>{escape_html(title)}</h1>
+    </div>
+    {content}
+    <footer style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #7f8c8d;">
+        <p>© {datetime.now().year} — Auto-generated from structured data. Last updated: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}</p>
+    </footer>
+</body>
+</html>"""
+
+def generate_contact_page():
+    contacts = load_data("schema-files/locations/locations.json") or load_data("schema-files/locations/locations.yaml")
+    if not contacts:
+        print("⚠️ No contact/location data found — skipping contact.html")
+        return
+
+    items = []
+    for loc in (contacts if isinstance(contacts, list) else [contacts]):
+        # Handle both old and new field names
+        name = loc.get('name') or loc.get('location_name') or 'Location'
+        address = loc.get('address') or ''
+        phone = loc.get('phone') or ''
+        email = loc.get('email') or ''
+        hours = loc.get('hours') or ''
+        map_url = loc.get('map_embed_url') or loc.get('google_maps_url') or ''  # Accept either
+
+        item_html = f"""
+        <div class="card">
+            <h3>{escape_html(name)}</h3>
+            {f'<p><strong>Address:</strong> {escape_html(address)}</p>' if address else ''}
+            {f'<p><strong>Phone:</strong> {escape_html(phone)}</p>' if phone else ''}
+            {f'<p><strong>Email:</strong> <a href="mailto:{email}">{escape_html(email)}</a></p>' if email else ''}
+            {f'<p><strong>Hours:</strong> {escape_html(hours)}</p>' if hours else ''}
+        """
+
+        # Only embed map if URL provided
+        if map_url:
+            item_html += f'''
+            <div style="margin-top: 1rem;">
+                <iframe src="{escape_html(map_url)}" width="100%" height="300" style="border:0; border-radius: 8px;" allowfullscreen loading="lazy"></iframe>
+            </div>
+            '''
+
+        item_html += "</div>"
+        items.append(item_html)
+
+    content = "".join(items)
+    with open("contact.html", "w", encoding="utf-8") as f:
+        f.write(generate_page("Contact Us", content))
+    print("✅ contact.html generated")
+
+def generate_services_page():
+    services = load_data("schema-files/services/services.json") or load_data("schema-files/services/services.yaml")
+    if not services:
+        print("⚠️ No services found — skipping services.html")
+        return
+
+    items = []
+    for svc in (services if isinstance(services, list) else [services]):
+        # Map old headers to new ones
+        title = svc.get('title') or svc.get('service_name') or 'Unnamed Service'
+        description = svc.get('description') or ''
+        price = svc.get('price') or svc.get('price_range') or 'Contact for pricing'
+        slug = svc.get('slug') or slugify(title)
+        featured = svc.get('featured', False)
+
+        badge = '<span class="badge">Featured</span>' if featured else ''
+
+        items.append(f"""
+        <div class="card">
+            <h2>{escape_html(title)} {badge}</h2>
+            <p>{escape_html(description)}</p>
+            <p><strong>Starting at:</strong> {escape_html(price)}</p>
+            <a href="#{slug}" style="display: inline-block; margin-top: 1rem;">🔗 Permalink</a>
+        </div>
+        """)
+
+    content = "".join(items)
+    with open("services.html", "w", encoding="utf-8") as f:
+        f.write(generate_page("Our Services", content))
+    print("✅ services.html generated")
+
+def generate_testimonials_page():
+    reviews = load_data("schema-files/reviews/reviews.json") or load_data("schema-files/reviews/reviews.yaml")
+    if not reviews:
+        print("⚠️ No testimonials found — skipping testimonials.html")
+        return
+
+    items = []
+    for rev in (reviews if isinstance(reviews, list) else [reviews]):
+        # Use what's available — no strict requirements
+        author = rev.get('customer_name') or rev.get('author') or 'Anonymous'
+        company = rev.get('client_name') or rev.get('company') or ''
+        quote = rev.get('review_body') or rev.get('quote') or rev.get('review_title') or 'No review text provided.'
+        rating = int(rev.get('rating', 5))
+        date = rev.get('date') or ''
+
+        star_display = '★' * rating + '☆' * (5 - rating)
+
+        items.append(f"""
+        <blockquote class="card" style="font-style: italic;">
+            <p>“{escape_html(quote)}”</p>
+            <footer style="margin-top: 1rem; font-style: normal;">
+                — {escape_html(author)}{f', {escape_html(company)}' if company else ''}
+                {f'<br/><small>{date}</small>' if date else ''}
+            </footer>
+            <div style="margin-top: 0.5rem; color: #f39c12;">{star_display}</div>
+        </blockquote>
+        """)
+
+    content = "".join(items)
+    with open("testimonials.html", "w", encoding="utf-8") as f:
+        f.write(generate_page("Testimonials", content))
+    print("✅ testimonials.html generated")
+
+def generate_index_page():
+    """Generate directory + welcome page"""
+    links = [
+        ("About Us", "about.html"),
+        ("Our Services", "services.html"),
+        ("Testimonials", "testimonials.html"),
+        ("FAQs", "faqs.html"),
+        ("Help Center", "help.html"),
+        ("Contact Us", "contact.html"),
+        ("Browse All Schema Files", "#files"),
+    ]
+
+    quick_links = "\n".join(f'<li style="margin: 0.5rem 0;"><a href="{url}" style="font-size: 1.1em; font-weight: 500;">{escape_html(name)}</a></li>' for name, url in links)
+
+    file_links = []
+    base_url = f"https://raw.githubusercontent.com/{os.getenv('GITHUB_REPOSITORY', 'DFYRANKINGS/AI-Visibility-Services')}/main"
     for root, dirs, files in os.walk("schema-files"):
         for file in files:
             if file.endswith((".json", ".yaml", ".md", ".llm")):
                 filepath = os.path.join(root, file).replace("\\", "/")
-                urlpath = filepath
-                full_url = f"{base_url}/{urlpath}"
+                full_url = f"{base_url}/{filepath}"
                 display_path = filepath.replace("schema-files/", "")
-                links.append(f'<li><a href="{full_url}" target="_blank">{escape_html(display_path)}</a></li>')
+                file_links.append(f'<li><a href="{full_url}" target="_blank">{escape_html(display_path)}</a></li>')
 
-    html = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>AI Data Directory</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {{ font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }}
-        h1 {{ color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }}
-        ul {{ list-style: none; padding: 0; }}
-        li {{ margin: 10px 0; }}
-        a {{ color: #3498db; text-decoration: none; }}
-        a:hover {{ text-decoration: underline; }}
-        .header {{ background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px; }}
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>🤖 AI Data Directory</h1>
-        <p>Browse machine-readable structured data for search engines and AI assistants.</p>
-    </div>
-    <h2>📁 All Schema Files</h2>
-    <ul>
-{''.join(sorted(links))}
-    </ul>
-    <p><em>Last updated: {os.popen('date -u "+%Y-%m-%d %H:%M UTC"').read().strip()}</em></p>
-</body>
-</html>"""
+    content = f"""
+    <p>Welcome to our AI-optimized data hub. Below are quick links to key sections, or browse all machine-readable files.</p>
     
+    <h2>🚀 Quick Navigation</h2>
+    <ul style="list-style: none; padding: 0;">
+        {quick_links}
+    </ul>
+
+    <h2 id="files">📁 All Schema Files</h2>
+    <ul>
+        {''.join(sorted(file_links))}
+    </ul>
+    """
+
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write(html)
+        f.write(generate_page("Welcome", content))
     print("✅ index.html generated")
 
+def generate_about_page():
+    orgs = load_data("schema-files/organization/organization.json") or load_data("schema-files/organization/organization.yaml")
+    if not orgs:
+        print("⚠️ No organization data found — skipping about.html")
+        return
+
+    org = orgs[0] if isinstance(orgs, list) else orgs
+    content = f"""
+    {f'<img src="{escape_html(org.get("logo_url", ""))}" alt="{escape_html(org.get("name", "Company"))}" style="max-height: 120px; margin-bottom: 2rem;">' if org.get("logo_url") else ''}
+    <p>{escape_html(org.get('description', ''))}</p>
+    {f'<h2>Our Mission</h2><p>{escape_html(org.get("mission", ""))}</p>' if org.get("mission") else ''}
+    {f'<h2>Our Vision</h2><p>{escape_html(org.get("vision", ""))}</p>' if org.get("vision") else ''}
+    """
+    with open("about.html", "w", encoding="utf-8") as f:
+        f.write(generate_page("About Us", content))
+    print("✅ about.html generated")
+
 def generate_faq_page():
-    """Generate a human-friendly FAQ page from faq schemas"""
-    faqs = []
-    faq_dir = "schema-files/faqs"
-    
-    if not os.path.exists(faq_dir):
+    faqs = load_data("schema-files/faqs/faqs.json") or load_data("schema-files/faqs/faqs.yaml")
+    if not faqs:
         print("⚠️ No FAQs found — skipping faq.html")
         return
 
-    for file in os.listdir(faq_dir):
-        if file.endswith(".yaml") or file.endswith(".json"):
-            filepath = os.path.join(faq_dir, file)
-            try:
-                data = load_yaml(filepath) if file.endswith(".yaml") else load_json(filepath)
-                if isinstance(data, list):
-                    faqs.extend(data)
-                elif isinstance(data, dict):
-                    faqs.append(data)
-            except Exception as e:
-                print(f"❌ Error loading {filepath}: {e}")
-
-    if not faqs:
-        print("⚠️ No FAQ content loaded — skipping faq.html")
-        return
-
-    # Build HTML Q&A
-    qa_blocks = []
-    for item in faqs:
-        question = escape_html(str(item.get("question", item.get("name", "Untitled"))))
-        answer = escape_html(str(item.get("answer", item.get("description", "No answer provided."))))
-        qa_blocks.append(f"""
-        <div style="margin: 30px 0; padding: 20px; background: #f8f9fa; border-radius: 8px;">
-            <h3 style="margin: 0 0 10px 0; color: #2c3e50;">{question}</h3>
-            <p>{answer}</p>
+    items = []
+    for item in (faqs if isinstance(faqs, list) else [faqs]):
+        items.append(f"""
+        <div class="card">
+            <h3 style="margin: 0 0 0.5rem 0;">{escape_html(item.get('question', ''))}</h3>
+            <p>{escape_html(item.get('answer', ''))}</p>
         </div>
         """)
 
-    html = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>FAQs</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {{ font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }}
-        h1 {{ color: #2c3e50; }}
-    </style>
-</head>
-<body>
-    <h1>❓ Frequently Asked Questions</h1>
-    {''.join(qa_blocks)}
-    <p><em>Last updated: {os.popen('date -u "+%Y-%m-%d %H:%M UTC"').read().strip()}</em></p>
-</body>
-</html>"""
-
+    content = "".join(items)
     with open("faqs.html", "w", encoding="utf-8") as f:
-        f.write(html)
+        f.write(generate_page("Frequently Asked Questions", content))
     print("✅ faqs.html generated")
 
 def generate_help_articles_page():
-    """Generate help articles page from markdown or schema files"""
     articles = []
     help_dir = "schema-files/help-articles"
-    
     if not os.path.exists(help_dir):
         print("⚠️ No help articles found — skipping help.html")
         return
@@ -135,43 +270,14 @@ def generate_help_articles_page():
             with open(filepath, 'r', encoding='utf-8') as f:
                 content = f.read()
                 title = file.replace(".md", "").replace("-", " ").title()
-                # Simple MD to HTML (just paragraphs for now)
-                paragraphs = "\n".join(f"<p>{escape_html(p)}</p>" for p in content.split("\n\n") if p.strip())
-                articles.append(f"""
-                <article style="margin: 40px 0; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
-                    <h2>{escape_html(title)}</h2>
-                    {paragraphs}
-                </article>
-                """)
-
-    if not articles:
-        print("⚠️ No help articles loaded — skipping help.html")
-        return
-
-    html = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Help Articles</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {{ font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; line-height: 1.7; }}
-        h1 {{ color: #2c3e50; }}
-        article {{ background: #fff; }}
-    </style>
-</head>
-<body>
-    <h1>📘 Help Articles</h1>
-    {''.join(articles)}
-    <p><em>Last updated: {os.popen('date -u "+%Y-%m-%d %H:%M UTC"').read().strip()}</em></p>
-</body>
-</html>"""
-
-    with open("help.html", "w", encoding="utf-8") as f:
-        f.write(html)
-    print("✅ help.html generated")
-
-if __name__ == "__main__":
-    generate_index_page()
-    generate_faq_page()
-    generate_help_articles_page()
+                # Very simple MD → HTML
+                html_lines = []
+                for line in content.split("\n"):
+                    if line.startswith("## "):
+                        html_lines.append(f"<h2>{escape_html(line[3:])}</h2>")
+                    elif line.startswith("# "):
+                        html_lines.append(f"<h1>{escape_html(line[2:])}</h1>")
+                    elif line.strip() == "":
+                        html_lines.append("<br/>")
+                    else:
+                        html_lines.append(f"<p>{escape_html(line)}</p>")
