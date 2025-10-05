@@ -1,35 +1,37 @@
-name: Generate JSON/YAML from XLSX and Update Sitemap
+name: 🔄 Generate + Ping on XLSX Change
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
       - 'templates/*.xlsx'
+  workflow_dispatch:  # ← Enables manual "Run workflow" button
+
+permissions:
+  contents: write
 
 jobs:
   generate-and-update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Set up Python
+      - name: 🐍 Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install Dependencies
+      - name: 📦 Install Dependencies
         run: |
           pip install pandas openpyxl PyYAML
 
-      - name: Get Changed XLSX Files via Git Diff
+      - name: 📄 Get Changed XLSX Files
         id: get_files
         run: |
-          echo "📄 Comparing against base commit: ${{ github.event.before }}"
           BEFORE_COMMIT=${{ github.event.before }}
           if [[ "$BEFORE_COMMIT" == "0000000000000000000000000000000000000000" ]]; then
             BEFORE_COMMIT=4b825dc642cb6eb9a060e54bf8d69288fbee4904
@@ -38,15 +40,15 @@ jobs:
           CHANGED_FILES=$(git diff --name-only --diff-filter=AM "$BEFORE_COMMIT" HEAD | grep '^templates/.*\.xlsx$' || true)
 
           if [ -z "$CHANGED_FILES" ]; then
-            echo "⚠️ No .xlsx files detected in templates/ in this push."
+            echo "⚠️ No .xlsx files detected in templates/"
           else
-            echo "✅ Detected changed XLSX files:"
+            echo "✅ Detected changed files:"
             echo "$CHANGED_FILES"
           fi
 
           echo "changed_xlsx=$CHANGED_FILES" >> $GITHUB_ENV
 
-      - name: Process Each XLSX File
+      - name: 🧩 Process Each XLSX File
         if: env.changed_xlsx != ''
         run: |
           echo "⚙️ Processing detected XLSX files..."
@@ -59,66 +61,84 @@ jobs:
             fi
           done <<< "${{ env.changed_xlsx }}"
 
-      - name: FORCE CREATE DUMMY FILES IN ALL DIRECTORIES (ENSURE GIT TRACKS THEM)
+      - name: 🗃️ Ensure Output Directories Exist
         run: |
-          mkdir -p schema-files/organization
-          mkdir -p schema-files/services
-          mkdir -p schema-files/products
-          mkdir -p schema-files/faqs
-          mkdir -p schema-files/help-articles
-          mkdir -p schema-files/reviews
-          mkdir -p schema-files/locations
-          mkdir -p schema-files/team
-          mkdir -p schema-files/awards
-          mkdir -p schema-files/press
-          mkdir -p schema-files/case-studies
-          touch schema-files/organization/.gitkeep
-          touch schema-files/services/.gitkeep
-          touch schema-files/products/.gitkeep
-          touch schema-files/faqs/.gitkeep
-          touch schema-files/help-articles/.gitkeep
-          touch schema-files/reviews/.gitkeep
-          touch schema-files/locations/.gitkeep
-          touch schema-files/team/.gitkeep
-          touch schema-files/awards/.gitkeep
-          touch schema-files/press/.gitkeep
-          touch schema-files/case-studies/.gitkeep
+          mkdir -p schemas/organization
+          mkdir -p schemas/services
+          mkdir -p schemas/products
+          mkdir -p schemas/faqs
+          mkdir -p schemas/help-articles
+          mkdir -p schemas/reviews
+          mkdir -p schemas/locations
+          mkdir -p schemas/team
+          mkdir -p schemas/awards
+          mkdir -p schemas/press
+          mkdir -p schemas/case-studies
 
-      - name: Generate or Update Sitemap (FORCE UPDATE)
+      - name: 🗺️ Generate or Update Sitemap
         run: |
           python generate_sitemaps.py
           touch ai-sitemap.xml
 
-      - name: Verify All Generated Files Exist
+      - name: 🤖 Notify AI Search Engines
+        run: |
+          SITEMAP_URL="https://raw.githubusercontent.com/${{ github.repository }}/main/ai-sitemap.xml"
+          echo "📡 Notifying AI search engines with sitemap: $SITEMAP_URL"
+
+          # Google (powers Gemini)
+          echo "→ Notifying Google (Gemini)..."
+          curl -s -o /dev/null -w "%{http_code}\n" "http://google.com/ping?sitemap=$SITEMAP_URL" \
+            && echo "✅ Success" || echo "❌ Failed (workflow continues)"
+
+          # Bing (powers Copilot)
+          echo "→ Notifying Bing (Copilot)..."
+          curl -s -o /dev/null -w "%{http_code}\n" "http://www.bing.com/ping?sitemap=$SITEMAP_URL" \
+            && echo "✅ Success" || echo "❌ Failed (workflow continues)"
+
+          # Yandex (powers Alice AI in RU/EU)
+          echo "→ Notifying Yandex (Alice)..."
+          curl -s -o /dev/null -w "%{http_code}\n" "https://yandex.com/ping?sitemap=$SITEMAP_URL" \
+            && echo "✅ Success" || echo "❌ Failed (workflow continues)"
+
+          # Internet Archive (feeds AI training datasets)
+          echo "→ Archiving sitemap with Wayback Machine..."
+          curl -s -o /dev/null -w "%{http_code}\n" "https://web.archive.org/save/$SITEMAP_URL" \
+            && echo "✅ Archived" || echo "❌ Archive failed (workflow continues)"
+
+          # Log reminders for engines that require manual submission
+          echo ""
+          echo "📌 MANUAL SUBMISSION REQUIRED (one-time per client):"
+          echo "→ Perplexity: https://perplexity.ai/business"
+          echo "→ You.com: https://you.com/partners"
+          echo "→ Phind: https://phind.com/business"
+          echo "→ Exa: https://exa.ai/"
+          echo ""
+          echo "ℹ️ Common Crawl discovers via robots.txt + sitemap — no ping needed."
+
+      - name: 🔍 Verify Generated Files
         run: |
           echo "🔍 VERIFYING OUTPUTS — Listing all generated files:"
           echo "=================================================="
-          find schema-files -type f KATEX_INLINE_OPEN -name "*.json" -o -name "*.yaml" -o -name "*.md" -o -name "*.llm" KATEX_INLINE_CLOSE | sort
+          find schemas -type f KATEX_INLINE_OPEN -name "*.json" -o -name "*.yaml" -o -name "*.md" -o -name "*.llm" KATEX_INLINE_CLOSE | sort
           echo ""
           echo "📄 ai-sitemap.xml last modified:"
           ls -la ai-sitemap.xml
 
-      - name: Configure Git Identity
+      - name: ⚙️ Configure Git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-      - name: Setup Remote with Token (Extra Safety)
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
-
-      - name: FORCE ADD AND COMMIT EVERYTHING
+      - name: 💾 Commit and Push Changes
         run: |
           git add --all
-          echo "📦 STAGED CHANGES:"
           git status --short
-          git commit -m "🤖 Auto-generate schema + sitemap [$(date +'%Y-%m-%d %H:%M:%S')]" || echo "✅ No changes, still pushing"
-          echo "🚀 PUSHING TO: ${{ github.ref_name }}"
+          git commit -m "🤖 Auto-update schemas + sitemap [$(date +'%Y-%m-%d %H:%M:%S')]" || echo "✅ No changes — still pushing"
           git push origin ${{ github.ref_name }}
 
-      - name: DEBUG - Verify Push Result
+      - name: ✅ Verify Push Success
         run: |
-          echo "🔎 Verifying latest commit on remote..."
           git fetch origin ${{ github.ref_name }}
           git log -1 origin/${{ github.ref_name }} --oneline
-          echo "✅ If commit above matches, SUCCESS! Files are live at Raw URLs."
+          echo "✅ SUCCESS — latest commit matches."
