@@ -1,0 +1,7 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-175-ai-schema-ai-schema-local-service-schema",
+  "title": "Local Service Schema: Connecting Offerings to Regions",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Service Schema Helps\nLocal service schema ties your business services to specific service areas or cities.\n\n### How to Set It Up\n- Include ServiceArea, GeoCoordinates, and AreaServed.\n- Connect to LocalBusiness and Service schema.\n- Publish both JSON and YAML formats.\n\n### Benefit\nStrong local service schema ensures assistants accurately associate services with your regions."
+}

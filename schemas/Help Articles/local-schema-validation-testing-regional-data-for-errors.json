@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-198-ai-schema-ai-schema-local-schema-validation",
+  "title": "Local Schema Validation: Testing Regional Data for Errors",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "FAQ Expansion",
+  "article": "### FAQ Expansion\n### Q: Why validate local schema?\nLocal schema validation ensures each location’s structured data meets AI standards.\n\n### Q: How to validate it?\n- Use Google and schema.org validators.\n- Test region-specific service pages.\n- Confirm active geo and areaServed links.\n\n### Q: Why it matters?\nValidated local schema validation boosts assistant confidence in regional visibility.",
+  "updated_date": "#### Last Updated: September 29, 2025",
+  "meta description": "Perform local schema validation to eliminate data errors and strengthen AI visibility for each location.",
+  "keywords": "local schema validation"
+}

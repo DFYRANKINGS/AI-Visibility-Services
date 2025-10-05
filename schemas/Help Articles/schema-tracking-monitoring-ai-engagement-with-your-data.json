@@ -1,0 +1,7 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-115-ai-schema-tracking",
+  "title": "Schema Tracking: Monitoring AI Engagement With Your Data",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Track Schema Performance\nSchema tracking reveals which structured elements drive visibility and citations.\n\n### How to Monitor\n- Use analytics tags for JSON fetches.\n- Track GitHub repo clone or crawl activity.\n- Record assistant referral phrases (“found you via AI”).\n\n### Outcome\nActive schema tracking helps you fine-tune updates and measure real AI ROI."
+}

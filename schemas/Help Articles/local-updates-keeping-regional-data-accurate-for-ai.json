@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-178-ai-schema-ai-schema-local-updates",
+  "title": "Local Updates: Keeping Regional Data Accurate for AI",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Updates Matter\nLocal updates keep your AI data aligned with real-world changes like address updates, service areas, or business hours.\n\n### How to Manage\n- Update LocalBusiness and Service schema quarterly.\n- Include dateModified and contact details.\n- Verify your AI sitemap links remain active.\n\n### Result\nFrequent local updates prevent misinformation and improve local assistant recommendations.",
+  "updated_date": "#### Last Updated: October 2, 2025",
+  "meta description": "Perform local updates quarterly to ensure assistants display correct regional information.",
+  "keywords": "local updates"
+}

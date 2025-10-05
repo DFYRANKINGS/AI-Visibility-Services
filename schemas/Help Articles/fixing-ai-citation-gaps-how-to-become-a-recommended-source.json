@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-18-ai-citation-gaps",
+  "title": "Fixing AI Citation Gaps: How to Become a Recommended Source",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### What Is an AI Citation Gap?\nAn AI citation gap happens when competitors are cited by AI assistants and you aren’t. It’s usually caused by missing structured data or outdated repositories.\n\n### How to Close the Gap\n1. Audit existing schema files. 2. Add FAQ and Review schemas. 3. Update AI sitemaps to remove empty entries. 4. Ping search APIs after updates. 5. Repeat quarterly.\n\n### Result\nWhen your AI citation profile is clean and consistent, assistants can verify you and list you as a trusted reference.",
+  "updated_date": "#### Last Updated: September 19, 2025",
+  "meta description": "Close AI citation gaps by auditing schema, refreshing AI sitemaps, and maintaining consistent structured data.",
+  "keywords": "AI citation gaps"
+}

@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-186-ai-schema-ai-schema-local-signals",
+  "title": "Local Signals: How AI Determines Regional Relevance",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Signals Matter\nLocal signals are the cues AI assistants use to verify your geographic relevance and match you to user intent.\n\n### How to Strengthen Local Signals\n- Include address and geo-coordinates in schema.\n- Add reviews mentioning local cities.\n- Maintain service area accuracy in JSON/YAML files.\n\n### Benefit\nStrong local signals improve your inclusion in AI-powered regional and “near me” searches.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Enhance local signals by aligning schema data with accurate geographic and service area details.",
+  "keywords": "local signals"
+}

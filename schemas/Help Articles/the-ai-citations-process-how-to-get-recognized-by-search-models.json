@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-31-ai-citations-process",
+  "title": "The AI Citations Process: How to Get Recognized by Search Models",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Understanding the Process\nThe AI citations process involves AI assistants pulling data from verified and structured sources. They use your schema and AI sitemap to confirm your credibility.\n\n### Step-by-Step\n1. Publish Organization, Service, and Review schema.\n2. Host JSON/YAML files in a public repository.\n3. Link them in an AI sitemap.\n4. Keep files refreshed to maintain accuracy.\n\n### Why It Works\nWhen assistants can cross-verify consistent data, your brand becomes a reliable source cited in AI responses across ChatGPT, Gemini, and Perplexity.",
+  "updated_date": "#### Last Updated: September 15, 2025",
+  "meta description": "Follow the AI citations process to ensure assistants verify and reference your brand in search answers.",
+  "keywords": "AI citations process"
+}

@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-66-ai-faq-schema",
+  "title": "FAQ Schema: Helping AI Assistants Understand Your Expertise",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why FAQ Schema Matters\nFAQ schema tells AI assistants exactly how you answer common questions—improving visibility in conversational search.\n\n### How to Implement\n- Mark each question and answer with FAQPage schema.\n- Keep responses concise and fact-based.\n- Add JSON and YAML versions to your repo.\n- Reference them in your AI sitemap.\n\n### The Result\nStructured FAQ schema increases inclusion in ChatGPT and Gemini answers, positioning your business as a verified expert.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Use FAQ schema to make your expertise readable and quotable by AI assistants.",
+  "keywords": "FAQ schema"
+}

@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-108-ai-schema-normalization",
+  "title": "Schema Normalization: Standardizing Your Data for AI",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### What Is Normalization?\nSchema normalization means structuring all data according to consistent patterns, names, and formatting so AI assistants can parse it accurately.\n\n### How to Normalize\n- Follow schema.org naming standards.\n- Remove redundant fields.\n- Apply same indentation and case format across files.\n\n### Result\nClean, consistent schema normalization increases reliability and boosts ranking in AI-driven recommendations.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Standardize your data through schema normalization to enhance machine readability and ranking.",
+  "keywords": "schema normalization"
+}

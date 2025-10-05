@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-118-ai-schema-coverage",
+  "title": "Schema Coverage: Ensuring Every Page Is Represented",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### What Is Schema Coverage?\nSchema coverage means all major pages (services, locations, reviews, FAQs) have structured data applied.\n\n### How to Improve\n- Audit all site URLs.\n- Apply schema to new content.\n- Add missing service or review markup.\n\n### Result\nBroad schema coverage ensures assistants always have complete, consistent information about your brand.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Expand schema coverage so every page contributes to your visibility in AI search engines.",
+  "keywords": "schema coverage"
+}

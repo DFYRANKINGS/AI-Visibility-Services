@@ -1,0 +1,7 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-100-ai-schema-review",
+  "title": "Schema Review: How to Audit and Improve Your Markup",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "FAQ Expansion",
+  "article": "### FAQ Expansion\n### Q: Why review schema regularly?\nSchema review keeps your structured data compliant and optimized for new AI standards.\n\n### Q: How to perform one?\n- Validate all schema using online tools.\n- Check for outdated fields.\n- Replace or delete broken references.\n\n### Q: What’s the benefit?\nA clean schema review ensures your business stays readable, accurate, and trustworthy to AI assistants."
+}

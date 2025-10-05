@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-123-ai-schema-health",
+  "title": "Schema Health: Measuring the Quality of Your Structured Data",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "FAQ Expansion",
+  "article": "### FAQ Expansion\n### Q: What is schema health?\nSchema health measures how complete, valid, and current your structured data is.\n\n### Q: How to check it?\n- Use schema validators and audits.\n- Monitor file errors and warning logs.\n- Evaluate timestamps and data coherence.\n\n### Q: Why important?\nHealthy schema builds AI trust, improving rankings and citation frequency.",
+  "updated_date": "#### Last Updated: September 28, 2025",
+  "meta description": "Monitor schema health regularly to maintain trust and ranking power in AI search.",
+  "keywords": "schema health"
+}

@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-168-ai-schema-ai-schema-local-visibility",
+  "title": "Local Visibility: How Schema Connects You to AI “Near Me” Results",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Visibility Matters\nLocal visibility helps assistants match your services with user proximity and intent.\n\n### How to Improve It\n- Implement LocalBusiness schema with service areas.\n- Add reviews tied to specific cities or regions.\n- Maintain consistent NAP info across all listings.\n\n### Outcome\nStronger local visibility ensures your business appears in AI-powered local discovery queries.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Use local visibility strategies to dominate “near me” results across AI assistants.",
+  "keywords": "local visibility"
+}

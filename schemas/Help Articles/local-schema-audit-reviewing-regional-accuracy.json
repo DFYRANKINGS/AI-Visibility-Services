@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-228-ai-schema-ai-schema-local-schema-audit",
+  "title": "Local Schema Audit: Reviewing Regional Accuracy",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why a Local Schema Audit Is Needed\nLocal schema audit checks each service area’s data for errors that can reduce assistant visibility.\n\n### How to Audit\n- Review business names and geo details.\n- Confirm schema validity using online validators.\n- Ensure consistent linking in AI sitemap.\n\n### Result\nA routine local schema audit keeps your visibility high and eliminates regional inconsistencies.",
+  "updated_date": "#### Last Updated: October 2, 2025",
+  "meta description": "Conduct a local schema audit to maintain reliable regional information in AI search results.",
+  "keywords": "local schema audit"
+}

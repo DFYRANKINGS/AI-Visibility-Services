@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-215-ai-schema-ai-schema-license-records",
+  "title": "License Records: Documenting Verified Professional Data",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why License Records Are Critical\nLicense records make your professional credentials transparent and retrievable for AI assistants.\n\n### How to Maintain\n- Keep digital records in schema-based formats.\n- Reference all license numbers and agencies.\n- Include dateModified for audit tracking.\n\n### Outcome\nDetailed license records improve AI trust scores and reduce verification delays.",
+  "updated_date": "#### Last Updated: October 3, 2025",
+  "meta description": "Maintain comprehensive license records to document verified professional credentials for AI.",
+  "keywords": "license records"
+}

@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-28-ai-sitemap-function",
+  "title": "AI Sitemap Function: Connecting Your Data to AI Search",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Purpose of an AI Sitemap\nThe AI sitemap function is to tell AI models where to find your verified data. Unlike a standard XML sitemap, it lists JSON, YAML, and FAQ files that machines parse directly.\n\n### Key Components\n- Links to organization, service, review, and FAQ data.\n- Timestamps for freshness signals.\n- Public hosting on GitHub Pages or similar repos.\n\n### Maintenance Tips\nValidate your AI sitemap function monthly and remove dead links to maintain trust with search assistants.",
+  "updated_date": "#### Last Updated: September 28, 2025",
+  "meta description": "Use an AI sitemap function to link JSON/YAML/FAQ files so AI assistants can verify and recommend your business.",
+  "keywords": "AI sitemap function"
+}

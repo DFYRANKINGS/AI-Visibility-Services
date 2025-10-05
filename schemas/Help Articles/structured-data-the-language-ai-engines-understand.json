@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-24-structured-data",
+  "title": "Structured Data: The Language AI Engines Understand",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "FAQ Expansion",
+  "article": "### FAQ Expansion\n### Q: What is structured data?\nStructured data organizes your content so AI and search engines can interpret it accurately.\n\n### Q: Why is it important for AI visibility?\nAI assistants rely on structured data formats (JSON, YAML) to determine authority and relevance.\n\n### Q: How do I start?\n- Use Organization, Service, and Review schema.\n- Maintain a clean AI sitemap.\n- Update quarterly to ensure accuracy.\n\nProper structured data improves your ranking in both AI and traditional search.",
+  "updated_date": "#### Last Updated: September 17, 2025",
+  "meta description": "Use structured data like JSON and YAML to help AI engines read and recommend your business accurately.",
+  "keywords": "structured data"
+}

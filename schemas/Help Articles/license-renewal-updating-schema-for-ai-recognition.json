@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-183-ai-schema-ai-schema-license-renewal",
+  "title": "License Renewal: Updating Schema for AI Recognition",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why License Renewal Is Important\nLicense renewal schema helps assistants confirm your credentials are up to date and valid.\n\n### How to Implement\n- Refresh credential expiration fields.\n- Update license numbers if changed.\n- Validate and push updates to your repository.\n\n### Result\nActive license renewal keeps AI models listing you confidently among verified professionals.",
+  "updated_date": "#### Last Updated: October 2, 2025",
+  "meta description": "Perform license renewal updates to keep assistants aware of your current professional validity.",
+  "keywords": "license renewal"
+}

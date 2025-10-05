@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-97-ai-schema-localization",
+  "title": "Schema Localization: Adapting Data for Regional AI Results",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Localization Matters\nSchema localization helps assistants deliver your brand to local audiences in specific regions or languages.\n\n### How to Implement\n- Add ServiceArea, GeoCoordinates, and Language schema fields.\n- Match structured data with local domains or directories.\n- Maintain multilingual JSON/YAML if applicable.\n\n### Outcome\nProper schema localization boosts accuracy in regional AI queries and “near me” recommendations.",
+  "updated_date": "#### Last Updated: September 25, 2025",
+  "meta description": "Use schema localization to tailor your structured data for regional accuracy in AI search.",
+  "keywords": "schema localization"
+}

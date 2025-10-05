@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-59-ai-awards",
+  "title": "AI Awards: Using Recognition to Build Machine Trust",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "News",
+  "article": "### News\n### Recognition in AI Search\nAI awards show assistants you’re credible through third-party mentions and schema-marked achievements.\n\n### How to Implement\n- Add Award schema to your about page.\n- List the awarding organization and year.\n- Include awards in JSON/YAML and AI sitemap.\n\n### The Benefit\nConsistent AI awards signals make assistants rank your business higher for expertise-related searches.",
+  "updated_date": "#### Last Updated: September 22, 2025",
+  "meta description": "Use AI awards schema to highlight recognition and increase credibility in AI search visibility.",
+  "keywords": "AI awards"
+}

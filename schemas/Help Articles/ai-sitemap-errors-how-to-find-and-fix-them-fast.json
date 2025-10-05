@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-052-ai-sitemap-errors",
+  "title": "AI Sitemap Errors: How to Find and Fix Them Fast",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "FAQ Expansion",
+  "article": "### FAQ Expansion\n### Q: Why do AI sitemap errors happen?\nAI sitemap errors appear when files are missing, empty, or use placeholder domains.\n\n### Q: How to detect them?\n- Validate every URL listed in the sitemap.\n- Use GitHub Actions or online parsers to catch 404s.\n- Check timestamps for stale updates.\n\n### Q: How to fix them?\nReplace broken links with correct paths and regenerate the sitemap. Then ping AI search endpoints again.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Prevent AI sitemap errors by validating links and refreshing timestamps for cleaner assistant indexing.",
+  "keywords": "AI sitemap errors"
+}

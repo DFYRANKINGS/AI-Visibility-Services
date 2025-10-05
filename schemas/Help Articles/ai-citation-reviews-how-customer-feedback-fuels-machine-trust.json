@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-051-ai-citation-reviews",
+  "title": "AI Citation Reviews: How Customer Feedback Fuels Machine Trust",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### How Reviews Influence AI Search\nAI citation reviews are proof-of-trust data points that AI assistants read before citing a brand. Verified testimonials increase authority in conversational results.\n\n### Steps to Leverage Them\n- Add Review and AggregateRating schema.\n- Include reviewer name + date.\n- Host JSON/YAML files and link in AI sitemaps.\n\n### Why It Matters\nFresh, transparent AI citation reviews make your business appear reliable to AI models comparing multiple options.",
+  "updated_date": "#### Last Updated: September 26, 2025",
+  "meta description": "Strengthen AI citation reviews to earn trust and boost your inclusion in assistant search results.",
+  "keywords": "AI citation reviews"
+}

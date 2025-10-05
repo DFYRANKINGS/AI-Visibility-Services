@@ -1,0 +1,7 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-160-ai-schema-ai-schema-service-schema",
+  "title": "Service Schema: Highlighting What You Offer to AI",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### What Is Service Schema?\nService schema defines the products or services you provide, making them machine-readable for assistants and AI search engines.\n\n### How to Apply\n- Include name, description, and service area.\n- Add pricing, category, and provider details.\n- Host in both JSON and YAML formats.\n\n### Payoff\nComprehensive service schema helps assistants match your services to user intent instantly."
+}

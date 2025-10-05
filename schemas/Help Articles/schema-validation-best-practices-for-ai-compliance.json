@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-137-ai-schema-validation-best-practices",
+  "title": "Schema Validation Best Practices for AI Compliance",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Validation Best Practices Matter\nSchema validation best practices are essential to prevent invisible data errors that AI crawlers can’t interpret.\n\n### Proven Practices\n- Validate before every update.\n- Standardize indentation and formatting.\n- Maintain single authoritative schema copies.\n\n### Outcome\nApplying schema validation best practices ensures your structured data consistently meets AI standards.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Follow schema validation best practices to keep your structured data compliant and AI-friendly.",
+  "keywords": "schema validation best practices"
+}

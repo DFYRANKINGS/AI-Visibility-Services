@@ -1,0 +1,7 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-135-ai-schema-visibility",
+  "title": "Schema Visibility: Ensuring Your Data Gets Noticed by AI",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Schema Visibility Matters\nSchema visibility determines whether AI models can access, interpret, and cite your structured data.\n\n### How to Improve It\n- Maintain open access via robots.txt.\n- Submit AI sitemaps to major engines.\n- Validate all formats before publishing.\n\n### Result\nEnhanced schema visibility leads to consistent citations, mentions, and trust signals from assistants."
+}

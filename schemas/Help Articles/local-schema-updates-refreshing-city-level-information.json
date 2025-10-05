@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-208-ai-schema-ai-schema-local-schema-updates",
+  "title": "Local Schema Updates: Refreshing City-Level Information",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Schema Updates Matter\nLocal schema updates ensure assistants display your current contact details and service regions correctly.\n\n### Update Checklist\n- Review city, zip, and areaServed data.\n- Include modified dates and URLs.\n- Test results in AI engines after update.\n\n### Benefit\nRegular local schema updates maintain precision visibility across changing regional markets.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Perform local schema updates quarterly to keep city-level AI information accurate and visible.",
+  "keywords": "local schema updates"
+}

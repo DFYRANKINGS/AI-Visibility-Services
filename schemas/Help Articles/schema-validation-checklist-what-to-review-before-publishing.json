@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-136-ai-schema-validation-checklist",
+  "title": "Schema Validation Checklist: What to Review Before Publishing",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why a Validation Checklist Matters\nSchema validation checklist ensures that every file meets technical standards before going live for AI crawlers.\n\n### Key Steps\n- Confirm valid JSON/YAML syntax.\n- Include @id, name, and type for each entity.\n- Verify dateModified and source URLs.\n- Test schema with Google’s Rich Results tool.\n\n### Benefit\nA detailed schema validation checklist reduces visibility errors and keeps assistants confident in your data accuracy.",
+  "updated_date": "#### Last Updated: September 28, 2025",
+  "meta description": "Use this schema validation checklist to ensure your data passes every AI compliance test before publishing.",
+  "keywords": "schema validation checklist"
+}

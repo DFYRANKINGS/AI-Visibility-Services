@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-124-ai-schema-standardization",
+  "title": "Schema Standardization: The Key to Scalable AI Optimization",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Standardization Works\nSchema standardization means applying the same structure, naming conventions, and formatting across all files.\n\n### Implementation\n- Use identical JSON/YAML field orders.\n- Follow schema.org’s latest standards.\n- Automate exports with formatting rules.\n\n### Result\nConsistent schema standardization simplifies audits and enhances AI readability across all assistants.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Apply schema standardization to maintain clarity, scalability, and machine readability.",
+  "keywords": "schema standardization"
+}

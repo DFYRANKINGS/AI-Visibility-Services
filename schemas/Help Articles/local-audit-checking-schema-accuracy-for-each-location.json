@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-173-ai-schema-ai-schema-local-audit",
+  "title": "Local Audit: Checking Schema Accuracy for Each Location",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Audits Matter\nLocal audits ensure all geographic data in your schema is correct and accessible to AI engines.\n\n### What to Check\n- Verify each branch address and coordinates.\n- Test “near me” visibility in assistants.\n- Validate all local pages for structured data.\n\n### Payoff\nFrequent local audits help maintain regional accuracy and boost assistant trust.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Perform local audits to verify and enhance your multi-location AI visibility.",
+  "keywords": "local audit"
+}

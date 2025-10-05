@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-146-ai-schema-ai-citation-gaps",
+  "title": "AI Citation Gaps: Why Assistants Might Skip Your Brand",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "FAQ Expansion",
+  "article": "### FAQ Expansion\n### Q: What are AI citation gaps?\nAI citation gaps happen when assistants find incomplete or conflicting data across your schema files.\n\n### Q: What causes them?\n- Missing source links or @id fields\n- Outdated timestamps\n- Non-public repositories\n\n### Q: How to fix them?\nUpdate schemas, verify URLs, and maintain synchronized AI sitemaps to close visibility gaps.",
+  "updated_date": "#### Last Updated: September 28, 2025",
+  "meta description": "Identify and fix AI citation gaps to ensure assistants can verify and reference your brand consistently.",
+  "keywords": "AI citation gaps"
+}

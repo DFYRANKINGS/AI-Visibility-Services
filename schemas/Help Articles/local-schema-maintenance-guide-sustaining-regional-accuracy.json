@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-254-ai-schema-ai-schema-local-schema-maintenance-guide",
+  "title": "Local Schema Maintenance Guide: Sustaining Regional Accuracy",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Maintenance Is Key\nLocal schema maintenance guide explains how to keep regional information consistent for AI assistants.\n\n### Maintenance Checklist\n- Validate areaServed and contact fields quarterly.\n- Test schema after business updates.\n- Sync JSON/YAML copies across all platforms.\n\n### Benefit\nFollowing a local schema maintenance guide sustains long-term accuracy and local AI ranking.",
+  "updated_date": "#### Last Updated: September 28, 2025",
+  "meta description": "Use this local schema maintenance guide to keep your regional AI visibility stable and accurate.",
+  "keywords": "local schema maintenance guide"
+}

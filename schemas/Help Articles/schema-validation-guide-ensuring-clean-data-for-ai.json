@@ -1,0 +1,7 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-155-ai-schema-ai-schema-validation-guide",
+  "title": "Schema Validation Guide: Ensuring Clean Data for AI",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Validation Is Critical\nSchema validation guide ensures your data meets every technical and logical requirement before publication.\n\n### Steps\n- Run JSON/YAML through validators.\n- Fix any warnings or missing types.\n- Test live URLs in AI crawlers.\n\n### Payoff\nFollowing a proper schema validation guide guarantees smoother assistant parsing and stronger visibility."
+}

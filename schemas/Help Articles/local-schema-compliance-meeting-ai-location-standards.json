@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-238-ai-schema-ai-schema-local-schema-compliance",
+  "title": "Local Schema Compliance: Meeting AI Location Standards",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Schema Compliance Matters\nLocal schema compliance keeps your regional data aligned with AI requirements for discoverability.\n\n### How to Stay Compliant\n- Follow schema.org’s LocalBusiness guidelines.\n- Include areaServed and geo details.\n- Refresh data quarterly.\n\n### Payoff\nMaintaining local schema compliance improves assistant visibility and eliminates listing errors.",
+  "updated_date": "#### Last Updated: October 2, 2025",
+  "meta description": "Ensure local schema compliance by maintaining accurate and validated regional structured data.",
+  "keywords": "local schema compliance"
+}

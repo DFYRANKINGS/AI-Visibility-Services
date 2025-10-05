@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-226-ai-schema-ai-schema-local-schema-sync",
+  "title": "Local Schema Sync: Keeping Regional Data Consistent",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Schema Sync Matters\nLocal schema sync ensures every branch or location shows the same accurate details to AI search engines.\n\n### How to Sync\n- Mirror schema files across all repositories.\n- Validate identical coordinates and addresses.\n- Re-ping AI engines after updates.\n\n### Benefit\nEffective local schema sync maintains visibility and eliminates inconsistencies across regions.",
+  "updated_date": "#### Last Updated: September 29, 2025",
+  "meta description": "Perform local schema sync to align all your regional data and strengthen AI-driven visibility.",
+  "keywords": "local schema sync"
+}

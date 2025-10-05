@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-106-ai-schema-maintenance",
+  "title": "Schema Maintenance: Keeping Data Healthy and Current",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Schema Maintenance Matters\nSchema maintenance is the ongoing process of reviewing, correcting, and refreshing your structured data to stay compliant and visible to AI.\n\n### How to Maintain\n- Schedule quarterly audits.\n- Replace outdated URLs or file paths.\n- Update JSON/YAML metadata like lastModified dates.\n\n### Outcome\nRegular schema maintenance prevents broken citations and keeps your brand in active rotation within AI assistants’ trusted sources.",
+  "updated_date": "#### Last Updated: September 29, 2025",
+  "meta description": "Perform schema maintenance quarterly to prevent broken data and sustain visibility in AI search.",
+  "keywords": "schema maintenance"
+}

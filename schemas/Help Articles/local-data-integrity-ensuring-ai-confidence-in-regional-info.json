@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-204-ai-schema-ai-schema-local-data-integrity",
+  "title": "Local Data Integrity: Ensuring AI Confidence in Regional Info",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Data Integrity Matters\nLocal data integrity ensures your regional details remain accurate across every AI data source.\n\n### How to Maintain\n- Sync all repositories (GitHub, GitLab, Bitbucket).\n- Use consistent naming for cities and zip codes.\n- Validate LocalBusiness schema quarterly.\n\n### Benefit\nReliable local data integrity builds AI confidence in your local authority and ranking.",
+  "updated_date": "#### Last Updated: September 28, 2025",
+  "meta description": "Maintain local data integrity for reliable regional results and trusted AI visibility.",
+  "keywords": "local data integrity"
+}

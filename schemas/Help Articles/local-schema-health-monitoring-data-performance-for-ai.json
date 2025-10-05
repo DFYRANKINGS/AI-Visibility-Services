@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-258-ai-schema-ai-schema-local-schema-health",
+  "title": "Local Schema Health: Monitoring Data Performance for AI",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Schema Health Matters\nLocal schema health measures the technical and accuracy performance of your regional structured data.\n\n### How to Monitor\n- Check schema load speeds and file integrity.\n- Validate all JSON/YAML structures.\n- Track local keyword mentions in AI engines.\n\n### Benefit\nMonitoring local schema health prevents data loss and ensures continuous AI discovery.",
+  "updated_date": "#### Last Updated: October 2, 2025",
+  "meta description": "Maintain strong local schema health to optimize performance and accuracy in AI visibility.",
+  "keywords": "local schema health"
+}

@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-232-ai-schema-ai-schema-local-schema-validation-process",
+  "title": "Local Schema Validation Process: Testing Regional Data",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Validation Is Important\nLocal schema validation process checks that each regional file adheres to AI discovery requirements.\n\n### How to Validate\n- Run schema through Google and schema.org tools.\n- Review areaServed and geoCoordinates accuracy.\n- Confirm linked schema entities work.\n\n### Benefit\nConsistent local schema validation process ensures assistants read your regional data without confusion.",
+  "updated_date": "#### Last Updated: September 29, 2025",
+  "meta description": "Follow a local schema validation process to ensure your regional data meets AI visibility standards.",
+  "keywords": "local schema validation process"
+}

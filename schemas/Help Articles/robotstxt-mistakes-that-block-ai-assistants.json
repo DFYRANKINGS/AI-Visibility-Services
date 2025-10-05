@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-68-ai-robots-mistakes",
+  "title": "Robots.txt Mistakes That Block AI Assistants",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Common Errors\nRobots.txt mistakes often block assistants from reading structured data folders.\n\n### Top Issues to Avoid\n- Using “Disallow /” on root folders.\n- Forgetting to allow JSON or YAML directories.\n- Leaving test or placeholder domains listed.\n\n### How to Fix Them\nEdit robots.txt to permit AI crawlers and reference updated sitemaps at the bottom of the file.",
+  "updated_date": "#### Last Updated: September 26, 2025",
+  "meta description": "Avoid robots.txt mistakes that prevent AI assistants from reading your verified data.",
+  "keywords": "robots.txt mistakes"
+}

@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-112-ai-schema-expiration",
+  "title": "Schema Expiration: Avoiding Outdated Data in AI Search",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Expiration Dates Matter\nSchema expiration fields alert AI engines when data is no longer valid. Missing or old timestamps can lower trust scores.\n\n### How to Manage\n- Add expires, validThrough, or dateModified tags.\n- Update licensing and pricing data quarterly.\n- Remove obsolete offers or staff entries.\n\n### Benefit\nProper schema expiration management keeps assistants confident in your accuracy and compliance.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Use schema expiration fields to retire outdated data and protect credibility in AI search.",
+  "keywords": "schema expiration"
+}

@@ -1,0 +1,7 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-170-ai-schema-ai-schema-local-schema",
+  "title": "Local Schema: How to Structure Data for Regional AI Search",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Schema Is Powerful\nLocal schema defines your regional presence so assistants can connect you with users near your service area.\n\n### Implementation Tips\n- Use GeoCoordinates, Address, and ServiceArea fields.\n- Link multiple branches using @id connections.\n- Reference your AI sitemap for faster indexing.\n\n### Benefit\nStrong local schema creates precision visibility across all local AI queries."
+}

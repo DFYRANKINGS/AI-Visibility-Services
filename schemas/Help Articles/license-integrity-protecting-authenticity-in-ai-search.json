@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-197-ai-schema-ai-schema-license-integrity",
+  "title": "License Integrity: Protecting Authenticity in AI Search",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why License Integrity Matters\nLicense integrity confirms that all credential data used by AI engines is valid, current, and verified.\n\n### How to Maintain\n- Store license info in secure public repos.\n- Include validation URLs and timestamps.\n- Sync across schema versions.\n\n### Benefit\nPreserving license integrity prevents misinformation and maintains compliance trust in AI-driven listings.",
+  "updated_date": "#### Last Updated: October 2, 2025",
+  "meta description": "Maintain license integrity by publishing accurate, verified credentials AI can trust.",
+  "keywords": "license integrity"
+}

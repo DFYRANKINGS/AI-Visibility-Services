@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-51-ai-faq-schema",
+  "title": "FAQ Schema: Turning Questions Into AI-Readable Answers",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why FAQ Schema Matters\nFAQ schema transforms everyday questions into structured data AIs can reference directly. Assistants use it to confirm facts and recommend services.\n\n### How to Implement\n- Mark each question & answer with FAQPage schema.\n- Publish JSON + YAML versions.\n- Link them inside your AI sitemap.\n\n### Result\nProper FAQ schema increases citation opportunities and voice-assistant mentions for your brand.",
+  "updated_date": "#### Last Updated: September 26 2025",
+  "meta description": "Add FAQ schema so AI assistants can quote your verified answers and boost brand authority.",
+  "keywords": "FAQ schema"
+}

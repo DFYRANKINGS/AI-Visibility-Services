@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-93-ai-schema-meta",
+  "title": "Schema vs Meta Tags: What’s the Difference in AI Search",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Understanding the Difference\nSchema vs meta compares two layers of data. Meta tags describe your content to browsers; schema describes it to AIs.\n\n### When to Use Each\n- Meta: For click previews in search.\n- Schema: For structured understanding by assistants.\n- Use both together for full coverage.\n\n### Tip\nIntegrating schema vs meta gives your content visibility in both human and AI search.",
+  "updated_date": "#### Last Updated: September 26, 2025",
+  "meta description": "Combine schema vs meta strategies to optimize visibility across AI assistants and web results.",
+  "keywords": "schema vs meta"
+}

@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-44-ai-sitemap-updates",
+  "title": "AI Sitemap Updates: How to Keep Search Assistants Informed",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Updates Matter\nAI sitemap updates ensure assistants always read your latest data. Without updates, old pages and empty links reduce your ranking potential.\n\n### How to Update\n- Add new JSON/YAML links whenever services change.\n- Remove deleted or empty files.\n- Timestamp each update for freshness.\n\n### Results\nConsistent AI sitemap updates boost indexing speed and increase your chances of inclusion in AI Overviews and assistant answers.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Perform regular AI sitemap updates to help assistants re-index and trust your latest business information.",
+  "keywords": "AI sitemap updates"
+}

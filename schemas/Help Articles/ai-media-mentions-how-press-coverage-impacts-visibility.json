@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-60-ai-media-mentions",
+  "title": "AI Media Mentions: How Press Coverage Impacts Visibility",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Media Mentions Matter\nAI media mentions strengthen your authority when assistants find press or publication references tied to your brand.\n\n### How to Optimize\n- Add NewsArticle or MediaObject schema to each feature.\n- Include backlinks to your site.\n- Store structured media files in JSON/YAML.\n\n### Impact\nBusinesses with AI media mentions see higher assistant citations and improved discovery across AI engines.",
+  "updated_date": "#### Last Updated: October 2, 2025",
+  "meta description": "Boost AI media mentions visibility by adding structured press and publication data assistants can verify.",
+  "keywords": "AI media mentions"
+}

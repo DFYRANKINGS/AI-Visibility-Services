@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-102-ai-schema-differences",
+  "title": "Schema Differences: JSON-LD, Microdata, and RDFa Explained",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Understanding the Formats\nSchema differences exist mainly in syntax and use cases. JSON-LD is modern and preferred for AI, while Microdata and RDFa embed directly in HTML.\n\n### Key Comparisons\n- JSON-LD: Easier to update, AI-friendly.\n- Microdata: Inline with content but harder to maintain.\n- RDFa: Semantic, often used in academic contexts.\n\n### Best Practice\nUse JSON-LD for AI visibility—it’s cleaner, modular, and machine-readable.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Learn schema differences and why JSON-LD is the top format for AI-optimized structured data.",
+  "keywords": "schema differences"
+}

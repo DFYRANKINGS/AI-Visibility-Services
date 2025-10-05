@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-131-ai-schema-metrics",
+  "title": "Schema Metrics: Tracking AI Visibility Performance",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Schema Metrics Matter\nSchema metrics provide measurable insight into how your structured data influences AI visibility, ranking, and citation frequency.\n\n### What to Measure\n- JSON/YAML crawl frequency\n- Citation count in assistants\n- Freshness and update timestamps\n\n### Insight\nMonitoring schema metrics helps refine strategy and prove ROI from AI optimization.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Track schema metrics to understand how structured data impacts visibility and trust in AI search.",
+  "keywords": "schema metrics"
+}

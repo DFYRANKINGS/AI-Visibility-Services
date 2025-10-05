@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-252-ai-schema-ai-schema-local-schema-validation-guide",
+  "title": "Local Schema Validation Guide: Step-by-Step Accuracy Checks",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why a Validation Guide Helps\nLocal schema validation guide gives a clear process for testing regional schema files before AI indexing.\n\n### Validation Steps\n- Use schema.org validator for each city page.\n- Confirm geo coordinates and address structure.\n- Check timestamp freshness.\n\n### Benefit\nA detailed local schema validation guide prevents errors and improves local AI recognition.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Follow this local schema validation guide to ensure every regional schema passes AI verification.",
+  "keywords": "local schema validation guide"
+}

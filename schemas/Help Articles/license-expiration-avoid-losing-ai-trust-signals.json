@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-182-ai-schema-ai-schema-license-expiration",
+  "title": "License Expiration: Avoid Losing AI Trust Signals",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "FAQ Expansion",
+  "article": "### FAQ Expansion\n### Q: Why track license expiration?\nLicense expiration schema ensures AI engines know your credentials are valid and active.\n\n### Q: What happens if they expire?\nAssistants may hide your listing or downgrade credibility.\n\n### Q: How to manage it?\nInclude expiration dates and update them in both JSON and YAML formats.",
+  "updated_date": "#### Last Updated: September 27, 2025",
+  "meta description": "Add license expiration schema to maintain valid and trusted professional status in AI search.",
+  "keywords": "license expiration"
+}

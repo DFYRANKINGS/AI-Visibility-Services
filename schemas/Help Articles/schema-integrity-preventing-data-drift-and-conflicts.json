@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-104-ai-schema-integrity",
+  "title": "Schema Integrity: Preventing Data Drift and Conflicts",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### What Is Schema Integrity?\nSchema integrity keeps all your structured data accurate, intact, and conflict-free across files and repositories.\n\n### How to Maintain\n- Automate cross-checks between JSON and YAML.\n- Validate with GitHub workflows.\n- Track version history for every change.\n\n### Benefit\nPreserved schema integrity ensures AIs always trust your information source as canonical.",
+  "updated_date": "#### Last Updated: September 28, 2025",
+  "meta description": "Protect schema integrity by validating and syncing all structured files for unified AI visibility.",
+  "keywords": "schema integrity"
+}

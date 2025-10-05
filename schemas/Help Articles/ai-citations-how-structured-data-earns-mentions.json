@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-141-ai-schema-ai-citations",
+  "title": "AI Citations: How Structured Data Earns Mentions",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### What Are AI Citations?\nAI citations occur when assistants like ChatGPT, Gemini, or Perplexity reference your data directly from schema files.\n\n### How to Earn Them\n- Maintain validated schema in public repositories.\n- Add source attribution fields.\n- Update timestamps for freshness.\n\n### Why It Matters\nAccurate AI citations boost credibility and position your brand as an authoritative source in conversational search.",
+  "updated_date": "#### Last Updated: September 29, 2025",
+  "meta description": "Learn how AI citations work and how to earn assistant mentions using structured data.",
+  "keywords": "AI citations"
+}

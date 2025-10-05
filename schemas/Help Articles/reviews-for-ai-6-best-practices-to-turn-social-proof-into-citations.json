@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-10-reviews-ai",
+  "title": "Reviews for AI: 6 Best Practices to Turn Social Proof Into Citations",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Reviews Drive AI Trust\nAI assistants rely on structured proof. Reviews AI strategies make testimonials machine-readable so models can cite your business confidently.\n\n### Best Practices\n- Use Review/AggregateRating schema.\n- Keep feedback recent.\n- Publish excerpts in JSON/YAML and list in your AI sitemap.\n- Link each service to matching testimonials.\n- Respond transparently to negatives.\n\n### From Proof to Performance\nWhen Reviews AI data is current and structured, assistants mention your brand more often — increasing credibility and conversions.\n\nWant to stay ahead in AI search? Let our team help you optimize for maximum visibility.",
+  "updated_date": "#### Last Updated: September 11, 2025",
+  "meta description": "Make Reviews AI-readable with Review schema, fresh dates, and an AI sitemap so assistants can verify and cite your social proof.",
+  "keywords": "Reviews AI"
+}

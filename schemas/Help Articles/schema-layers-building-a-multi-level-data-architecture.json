@@ -1,0 +1,7 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-120-ai-schema-layers",
+  "title": "Schema Layers: Building a Multi-Level Data Architecture",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### What Are Schema Layers?\nSchema layers refer to organizing structured data across multiple files—like core Organization schema linked to individual Service and Review layers.\n\n### Implementation\n- Link lower-level schema using @id.\n- Maintain parent-child relationships.\n- Reference all layers in your AI sitemap.\n\n### Benefit\nUsing schema layers clarifies hierarchy, making it easier for assistants to interpret and cite your data."
+}

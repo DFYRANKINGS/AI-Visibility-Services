@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-194-ai-schema-ai-schema-local-optimization",
+  "title": "Local Optimization: Fine-Tuning Schema for Area Visibility",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Optimization Works\nLocal optimization refines your schema to highlight specific service areas for AI search visibility.\n\n### How to Optimize\n- Add AreaServed and GeoCoordinates fields.\n- Create separate schema entries for each location.\n- Cross-link local reviews and projects.\n\n### Result\nWell-optimized local optimization ensures your business ranks accurately in all AI-driven local markets.",
+  "updated_date": "#### Last Updated: October 3, 2025",
+  "meta description": "Perform local optimization to fine-tune schema and dominate your service areas in AI results.",
+  "keywords": "local optimization"
+}

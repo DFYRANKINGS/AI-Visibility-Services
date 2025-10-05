@@ -1,0 +1,7 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-105-ai-schema-mapping",
+  "title": "Schema Mapping: Linking All Entities for AI Understanding",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Schema Mapping Matters\nSchema mapping connects every entity—your business, team, services, and reviews—so AI engines understand relationships clearly.\n\n### Implementation Steps\n- Use @id fields to link entities.\n- Reference parent and child schemas.\n- Maintain consistent naming conventions.\n\n### Impact\nEffective schema mapping increases the likelihood that assistants correctly associate all your data and cite you accurately."
+}

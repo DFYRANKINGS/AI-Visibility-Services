@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-19-schema-for-lawyers",
+  "title": "Schema for Lawyers: How Attorneys Can Build AI Authority",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Schema Matters for Attorneys\nSchema for lawyers allows AI assistants to verify your practice areas, licenses, and reviews. Without it, you risk being excluded from legal queries.\n\n### Implementation Steps\n- Use LegalService schema with bar license details.\n- Add review and FAQ schema covering common questions.\n- Publish JSON and YAML versions in your AI repository.\n- Submit the AI sitemap to search and AI engines.\n\n### Outcome\nProper schema for lawyers builds AI authority and drives qualified client inquiries from assistant-based search.",
+  "updated_date": "#### Last Updated: October 1, 2025",
+  "meta description": "Use schema for lawyers to display verified licenses and reviews so AI assistants trust and recommend your practice.",
+  "keywords": "schema for lawyers"
+}

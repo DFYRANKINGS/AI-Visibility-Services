@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-98-ai-schema-licenses",
+  "title": "Schema Licenses: Showing Proof of Qualification to AI",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Licenses Matter\nSchema licenses let AIs confirm your professional legitimacy. Verified licensing data enhances trust in competitive niches like law, healthcare, or construction.\n\n### How to Add\n- Use License or Credential schema.\n- Include license number, issuing agency, and expiration.\n- Cross-reference in your AI sitemap.\n\n### Benefit\nPublishing schema licenses builds authority and prevents exclusion from trust-sensitive assistant results.",
+  "updated_date": "#### Last Updated: September 22, 2025",
+  "meta description": "Add schema licenses with verified credentials to prove expertise to AI assistants.",
+  "keywords": "schema licenses"
+}

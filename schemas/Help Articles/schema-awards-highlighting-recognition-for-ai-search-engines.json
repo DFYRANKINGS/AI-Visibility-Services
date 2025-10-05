@@ -1,0 +1,7 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-95-ai-schema-awards",
+  "title": "Schema Awards: Highlighting Recognition for AI Search Engines",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Recognition Matters\nSchema awards highlight trust signals AI engines can verify through structured data.\n\n### How to Implement\n- Use Award schema on About or Home pages.\n- Include title, year, and awarding organization.\n- Publish both JSON and YAML versions.\n\n### Outcome\nProper schema awards markup improves credibility and helps AIs cite you for excellence in industry-related results."
+}

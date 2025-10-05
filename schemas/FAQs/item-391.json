@@ -1,0 +1,7 @@
+{
+  "client_name": "DFY AI Visibility",
+  "keyword": "LLM.txt location",
+  "question": "Where do I place an LLM.txt file?",
+  "answer": "At the root of your domain (yourdomain.com/llm.txt) so AI engines automatically find it.",
+  "Unnamed: 4": "LLM_File"
+}

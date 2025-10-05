@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-103-ai-schema-timestamps",
+  "title": "Schema Timestamps: How “Last Updated” Boosts AI Trust",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "FAQ Expansion",
+  "article": "### FAQ Expansion\n### Q: Why include timestamps?\nSchema timestamps prove data freshness to AI crawlers.\n\n### Q: Where should they appear?\nUse the dateModified and lastReviewed fields in your JSON and YAML files.\n\n### Q: How often should you update?\nAt least quarterly, or any time business info changes.\n\nTimely schema timestamps help assistants favor your data over stale competitors.",
+  "updated_date": "#### Last Updated: September 25, 2025",
+  "meta description": "Add schema timestamps to signal freshness and reliability to AI assistants.",
+  "keywords": "schema timestamps"
+}

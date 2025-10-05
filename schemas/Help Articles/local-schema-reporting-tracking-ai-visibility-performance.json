@@ -1,0 +1,10 @@
+{
+  "client_name": "DFY AI Visibility",
+  "article_id": "help-246-ai-schema-ai-schema-local-schema-reporting",
+  "title": "Local Schema Reporting: Tracking AI Visibility Performance",
+  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
+  "article": "### Guide\n### Why Local Schema Reporting Matters\nLocal schema reporting measures how well your regional data performs in AI discovery and recommendation systems.\n\n### How to Report\n- Track schema validation scores per location.\n- Monitor AI mentions for city-level data.\n- Log quarterly updates and schema revisions.\n\n### Benefit\nConsistent local schema reporting highlights areas for improvement and supports long-term AI optimization.",
+  "updated_date": "#### Last Updated: September 30, 2025",
+  "meta description": "Use local schema reporting to track performance and visibility of regional data in AI search.",
+  "keywords": "local schema reporting"
+}
