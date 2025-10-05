@@ -58,7 +58,7 @@ def main():
         f.write(sitemap_content)
 
     print("✅ ai-sitemap.xml generated successfully.")
-    print("🌐 Test a file: https://raw.githubusercontent.com/DFYRANKINGS/{NEW_REPO_NAME}/main/schema-files/organization/main-data.json")
+    print("🌐 Test a file: https://raw.githubusercontent.com/DFYRANKINGS/AI-Visibility-Services/main/schema-files/organization/main-data.json")
 
 if __name__ == "__main__":
     main()
