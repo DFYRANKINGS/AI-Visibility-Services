@@ -1,6 +1,5 @@
 import os
 import pandas as pd
-import yaml
 import json
 import re
 import sys
@@ -17,7 +16,7 @@ def main(input_file="templates/client-data.xlsx"):
     print(f"📂 Opening Excel file: {input_file}")
     
     try:
-        xlsx = pd.ExcelFile(input_file)  # ← RENAMED TO 'xlsx'
+        xlsx = pd.ExcelFile(input_file)
     except FileNotFoundError:
         print(f"❌ Error: File '{input_file}' not found.")
         sys.exit(1)
@@ -25,27 +24,50 @@ def main(input_file="templates/client-data.xlsx"):
         print(f"❌ Error loading Excel file: {e}")
         sys.exit(1)
 
-    # Process each sheet — using 'xlsx' now
-    for sheet_name in xlsx.sheet_names:  # ← CHANGED HERE
-        print(f"\n📄 Processing sheet: {sheet_name}")
-        df = xlsx.parse(sheet_name)      # ← AND HERE
-        
-        if df.empty:
-            print(f"⚠️  Sheet '{sheet_name}' is empty — skipping")
+    # Map your actual sheet names to output dirs
+    sheet_config = {
+        "organization": "schemas/organization",
+        "Services": "schemas/services",           # ← Your sheet name
+        "Products": "schemas/products",
+        "FAQs": "schemas/faqs",                   # ← Your sheet name
+        "Help Articles": "schemas/help-articles", # ← Your sheet name
+        "Reviews": "schemas/reviews",
+        "Locations": "schemas/locations",
+        "Team": "schemas/team",
+        "Awards & Certifications": "schemas/awards",
+        "Press/News Mentions": "schemas/press",
+        "Case Studies": "schemas/case-studies",
+        "core_info": "schemas/core-info"
+    }
+
+    for sheet_name in xlsx.sheet_names:
+        if sheet_name not in sheet_config:
+            print(f"⚠️ Skipping unsupported sheet: {sheet_name}")
             continue
 
-        output_dir = f"schemas/{sheet_name}"
+        print(f"\n📄 Processing sheet: {sheet_name}")
+        df = xlsx.parse(sheet_name)
+        
+        if df.empty:
+            print(f"⚠️ Sheet '{sheet_name}' is empty — skipping")
+            continue
+
+        output_dir = sheet_config[sheet_name]
         os.makedirs(output_dir, exist_ok=True)
         print(f"📁 Output directory: {output_dir}")
 
+        processed_count = 0
+
         for idx, row in df.iterrows():
+            # Skip completely empty rows
             if row.dropna().empty:
                 continue
 
-            if sheet_name == "help-articles":
+            # HELP ARTICLES — SPECIAL HANDLING
+            if sheet_name == "Help Articles":
                 title = str(row.get('title', '')).strip()
                 slug = str(row.get('slug', '')).strip()
-                content = str(row.get('content', '')).strip()
+                content = str(row.get('article', '')).strip()  # ← You named the column "article"
 
                 if not slug:
                     slug = slugify(title) if title else f"article-{idx+1}"
@@ -69,12 +91,46 @@ def main(input_file="templates/client-data.xlsx"):
                         f.write("---\n\n")
                         f.write(content)
                     print(f"✅ Generated: {filepath}")
+                    processed_count += 1
                 except Exception as e:
                     print(f"❌ Failed to write {filepath}: {e}")
 
+            # FAQs
+            elif sheet_name == "FAQs":
+                question = str(row.get('question', '')).strip()
+                answer = str(row.get('answer', '')).strip()
+
+                if not question:
+                    question = f"Untitled FAQ {idx+1}"
+
+                safe_id = slugify(question)
+                base_id = safe_id
+                counter = 1
+                filename = f"{safe_id}.json"
+                filepath = os.path.join(output_dir, filename)
+
+                while os.path.exists(filepath):
+                    filename = f"{base_id}-{counter}.json"
+                    filepath = os.path.join(output_dir, filename)
+                    counter += 1
+
+                item_data = {
+                    "question": question,
+                    "answer": answer
+                }
+
+                try:
+                    with open(filepath, 'w', encoding='utf-8') as f:
+                        json.dump(item_data, f, indent=2, ensure_ascii=False)
+                    print(f"✅ Generated: {filepath}")
+                    processed_count += 1
+                except Exception as e:
+                    print(f"❌ Failed to write {filepath}: {e}")
+
+            # ALL OTHER SHEETS
             else:
                 id_field = None
-                for key in ['id', 'service_id', 'faq_id', 'review_id', 'slug', 'name', 'title']:
+                for key in ['service_id', 'product_id', 'faq_id', 'review_id', 'location_id', 'case_id', 'slug', 'name', 'title']:
                     if key in row and pd.notna(row[key]):
                         id_field = str(row[key]).strip()
                         break
@@ -106,8 +162,11 @@ def main(input_file="templates/client-data.xlsx"):
                     with open(filepath, 'w', encoding='utf-8') as f:
                         json.dump(item_data, f, indent=2, ensure_ascii=False, default=str)
                     print(f"✅ Generated: {filepath}")
+                    processed_count += 1
                 except Exception as e:
                     print(f"❌ Failed to write {filepath}: {e}")
+
+        print(f"📊 Total processed in '{sheet_name}': {processed_count} items")
 
     print("\n🎉 All files generated successfully.")
 
