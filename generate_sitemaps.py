@@ -7,7 +7,7 @@ import glob
 
 def get_site_url():
     # Serve files via GitHub Raw — publicly crawlable by search engines & AI bots
-    return "https://raw.githubusercontent.com/DFYRANKINGS/{NEW_REPO_NAME}/main"
+    return "https://raw.githubusercontent.com/DFYRANKINGS/AI-Visibility-Services/main"
 
 def find_generated_files():
     """Find all generated .json, .yaml, .md, .llm in schema-files/"""
