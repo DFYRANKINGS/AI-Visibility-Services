@@ -1,71 +1,46 @@
-name: 🌐 Build Public Pages (Directory, FAQ, Help)
+# .github/workflows/build-public-pages.yml
+
+name: 🏗️ Build Public HTML Pages
 
 on:
+  workflow_dispatch: # Allows manual run
   push:
-    branches: [ main ]
+    branches:
+      - main
     paths:
-      - 'schemas/**'   # Trigger when ANY schema file changes
-  workflow_dispatch:
-
-permissions:
-  contents: write
+      - 'schemas/**'     # Rebuild if schema files change
+      - 'ai-generators/build_public_pages.py'
 
 jobs:
-  build-pages:
+  build-public-pages:
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Checkout Repository
+      - name: 📥 Checkout code
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
 
       - name: 🐍 Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: '3.10'
 
-      - name: 📦 Install Dependencies
+      - name: 📦 Install dependencies
         run: |
-          pip install PyYAML
+          pip install pandas pyyaml
 
-      - name: 🏗️ Build Public HTML Pages
+      - name: 🖨️ Generate public HTML pages
         run: |
+          cd ai-generators
           python build_public_pages.py
 
-      - name: 🔍 Verify Generated Pages Exist
+      - name: 💾 Commit and push generated files (if changed)
         run: |
-          echo "📄 Checking for generated HTML files..."
-          FILES=("index.html" "about.html" "contact.html" "services.html" "testimonials.html" "faqs.html" "help.html")
-          for file in "${FILES[@]}"; do
-            if [ -f "$file" ]; then
-              echo "✅ $file exists"
-            else
-              echo "❌ $file NOT FOUND — will be skipped in commit"
-            fi
-          done
-
-      - name: 💾 Commit Generated Pages
-        run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Add each file individually — don't fail if some are missing
-          FILES=("index.html" "about.html" "contact.html" "services.html" "testimonials.html" "faqs.html" "help.html")
-          CHANGES_DETECTED=false
-
-          for file in "${FILES[@]}"; do
-            if [ -f "$file" ]; then
-              git add "$file"
-              echo "➕ Added $file to commit"
-              CHANGES_DETECTED=true
-            fi
-          done
-
-          if [ "$CHANGES_DETECTED" = true ]; then
-            git commit -m "🌐 Auto-build public pages [$(date +'%Y-%m-%d')]"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add help.html faqs.html services.html testimonials.html contact.html about.html index.html
+          git status
+          if ! git diff --cached --quiet; then
+            git commit -m "AUTO: Update public HTML pages"
             git push origin main
-            echo "✅ Pages committed and pushed"
           else
-            echo "❌ NO HTML PAGES FOUND — nothing to commit"
+            echo "No changes to commit."
           fi
