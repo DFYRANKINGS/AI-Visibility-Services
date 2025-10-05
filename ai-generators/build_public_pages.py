@@ -74,7 +74,7 @@ def generate_page(title, content):
 </html>"""
 
 def generate_contact_page():
-    contacts = load_data("schema-files/locations/locations.json") or load_data("schema-files/locations/locations.yaml")
+    contacts = load_data("schemas/locations/locations.json") or load_data("schemas/locations/locations.yaml")
     if not contacts:
         print("⚠️ No contact/location data found — skipping contact.html")
         return
@@ -115,7 +115,7 @@ def generate_contact_page():
     print("✅ contact.html generated")
 
 def generate_services_page():
-    services = load_data("schema-files/services/services.json") or load_data("schema-files/services/services.yaml")
+    services = load_data("schemas/services/services.json") or load_data("schemas/services/services.yaml")
     if not services:
         print("⚠️ No services found — skipping services.html")
         return
@@ -146,7 +146,7 @@ def generate_services_page():
     print("✅ services.html generated")
 
 def generate_testimonials_page():
-    reviews = load_data("schema-files/reviews/reviews.json") or load_data("schema-files/reviews/reviews.yaml")
+    reviews = load_data("schemas/reviews/reviews.json") or load_data("schemas/reviews/reviews.yaml")
     if not reviews:
         print("⚠️ No testimonials found — skipping testimonials.html")
         return
@@ -194,12 +194,12 @@ def generate_index_page():
 
     file_links = []
     base_url = f"https://raw.githubusercontent.com/{os.getenv('GITHUB_REPOSITORY', 'DFYRANKINGS/AI-Visibility-Services')}/main"
-    for root, dirs, files in os.walk("schema-files"):
+    for root, dirs, files in os.walk("schemas"):
         for file in files:
             if file.endswith((".json", ".yaml", ".md", ".llm")):
                 filepath = os.path.join(root, file).replace("\\", "/")
                 full_url = f"{base_url}/{filepath}"
-                display_path = filepath.replace("schema-files/", "")
+                display_path = filepath.replace("schemas/", "")
                 file_links.append(f'<li><a href="{full_url}" target="_blank">{escape_html(display_path)}</a></li>')
 
     content = f"""
@@ -221,7 +221,7 @@ def generate_index_page():
     print("✅ index.html generated")
 
 def generate_about_page():
-    orgs = load_data("schema-files/organization/organization.json") or load_data("schema-files/organization/organization.yaml")
+    orgs = load_data("schemas/organization/organization.json") or load_data("schemas/organization/organization.yaml")
     if not orgs:
         print("⚠️ No organization data found — skipping about.html")
         return
@@ -238,9 +238,9 @@ def generate_about_page():
     print("✅ about.html generated")
 
 def generate_faq_page():
-    faqs = load_data("schema-files/faqs/faqs.json") or load_data("schema-files/faqs/faqs.yaml")
+    faqs = load_data("schemas/faqs/faqs.json") or load_data("schemas/faqs/faqs.yaml")
     if not faqs:
-        print("⚠️ No FAQs found — skipping faq.html")
+        print("⚠️ No FAQs found — skipping faqs.html")
         return
 
     items = []
@@ -259,7 +259,7 @@ def generate_faq_page():
 
 def generate_help_articles_page():
     articles = []
-    help_dir = "schema-files/help-articles"
+    help_dir = "schemas/help-articles"
     if not os.path.exists(help_dir):
         print("⚠️ No help articles found — skipping help.html")
         return
@@ -269,15 +269,70 @@ def generate_help_articles_page():
             filepath = os.path.join(help_dir, file)
             with open(filepath, 'r', encoding='utf-8') as f:
                 content = f.read()
-                title = file.replace(".md", "").replace("-", " ").title()
-                # Very simple MD → HTML
-                html_lines = []
-                for line in content.split("\n"):
-                    if line.startswith("## "):
-                        html_lines.append(f"<h2>{escape_html(line[3:])}</h2>")
-                    elif line.startswith("# "):
-                        html_lines.append(f"<h1>{escape_html(line[2:])}</h1>")
-                    elif line.strip() == "":
-                        html_lines.append("<br/>")
+
+            # Parse frontmatter (if any)
+            title = None
+            body_lines = []
+            in_frontmatter = False
+            frontmatter_done = False
+
+            for line in content.splitlines():
+                if line.strip() == "---" and not frontmatter_done:
+                    if not in_frontmatter:
+                        in_frontmatter = True
                     else:
-                        html_lines.append(f"<p>{escape_html(line)}</p>")
+                        in_frontmatter = False
+                        frontmatter_done = True
+                    continue
+
+                if in_frontmatter and not frontmatter_done:
+                    if line.lower().startswith("title:"):
+                        title = line.split(":", 1)[1].strip()
+                else:
+                    body_lines.append(line)
+
+            if not title:
+                title = file.replace(".md", "").replace("-", " ").title()
+
+            # Convert Markdown-like lines to simple HTML
+            html_lines = []
+            for line in body_lines:
+                if line.startswith("## "):
+                    html_lines.append(f"<h2>{escape_html(line[3:])}</h2>")
+                elif line.startswith("# "):
+                    html_lines.append(f"<h1>{escape_html(line[2:])}</h1>")
+                elif line.startswith("- ") or line.startswith("* "):
+                    # Simple bullet list handling
+                    html_lines.append(f"<p>• {escape_html(line[2:])}</p>")
+                elif line.strip() == "":
+                    html_lines.append("<br/>")
+                else:
+                    html_lines.append(f"<p>{escape_html(line)}</p>")
+
+            article_html = f"""
+            <div class="card">
+                <h2>{escape_html(title)}</h2>
+                {''.join(html_lines)}
+            </div>
+            """
+            articles.append(article_html)
+
+    if not articles:
+        print("⚠️ No valid help articles found — skipping help.html")
+        return
+
+    content = "".join(articles)
+    with open("help.html", "w", encoding="utf-8") as f:
+        f.write(generate_page("Help Center", content))
+    print("✅ help.html generated")
+
+if __name__ == "__main__":
+    print("🏗️ Starting public page generation...")
+    generate_index_page()
+    generate_about_page()
+    generate_services_page()
+    generate_testimonials_page()
+    generate_faq_page()
+    generate_help_articles_page()
+    generate_contact_page()
+    print("🎉 All public pages generated successfully.")
