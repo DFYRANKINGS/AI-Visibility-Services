@@ -1,117 +1,137 @@
 import os
-import json
-import yaml
 import pandas as pd
-import argparse
-from datetime import datetime
+import yaml
+import json
+import re
+import sys
 
-# ===== CONFIG =====
-DEFAULT_DATA_FILE = "templates/client-data.xlsx"
-OUTPUT_DIR = "schema-files"
+def slugify(text):
+    """Generate clean, URL-friendly slug from text"""
+    if not text:
+        return "untitled"
+    # Remove invalid characters
+    text = re.sub(r'[^a-zA-Z0-9\s-]', '', str(text))
+    # Replace spaces and multiple hyphens with single hyphen
+    text = re.sub(r'[\s]+', '-', text.strip().lower())
+    return text or "untitled"
 
-# Map Google Sheet tab names → output folder names
-SHEET_TO_FOLDER = {
-    "core_info": "organization",
-    "Services": "services",
-    "Products": "products",
-    "FAQs": "faqs",
-    "Help Articles": "help-articles",
-    "Reviews": "reviews",
-    "Locations": "locations",
-    "Team": "team",
-    "Awards & Certifications": "awards",
-    "PressNews Mentions": "press",
-    "Case Studies": "case-studies",
-}
-# ===================
-
-def ensure_output_dir():
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-def sanitize_value(val):
-    """Convert any non-JSON-safe value into string or None"""
-    if pd.isna(val):  # Covers NaN, NaT, None
-        return None
-    elif isinstance(val, (pd.Timestamp, datetime)):
-        return val.isoformat()
-    elif isinstance(val, pd.Timedelta):
-        return str(val)
-    elif hasattr(val, 'to_pydatetime'):  # Some pandas datetime types
-        return val.to_pydatetime().isoformat()
-    elif isinstance(val, (list, dict)):
-        # Recursively sanitize nested structures (unlikely in your data, but safe)
-        if isinstance(val, list):
-            return [sanitize_value(x) for x in val]
-        else:
-            return {k: sanitize_value(v) for k, v in val.items()}
-    else:
-        # Fallback: convert everything else to string if needed later
-        return val
-
-def save_json(data, path):
-    if not data:
-        print(f"⚠️ No data to save for {path}")
-        return
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+def main(input_file="templates/client-data.xlsx"):
+    print(f"📂 Opening Excel file: {input_file}")
     
-    # Deep sanitize every value
-    clean_data = {k: sanitize_value(v) for k, v in data.items()}
+    try:
+        xls = pd.ExcelFile(input_file)
+    except FileNotFoundError:
+        print(f"❌ Error: File '{input_file}' not found.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"❌ Error loading Excel file: {e}")
+        sys.exit(1)
 
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(clean_data, f, indent=2, ensure_ascii=False)
-    print(f"✅ SAVED: {path}")
+    # Process each sheet
+    for sheet_name in xls.sheet_names:
+        print(f"\n📄 Processing sheet: {sheet_name}")
+        df = xls.parse(sheet_name)
+        
+        # Skip empty sheets
+        if df.empty:
+            print(f"⚠️  Sheet '{sheet_name}' is empty — skipping")
+            continue
 
-def save_yaml(data, path):
-    if not data:
-        return
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    
-    # Sanitize for YAML too (though YAML is more forgiving)
-    clean_data = {k: sanitize_value(v) for k, v in data.items()}
+        # Define output directory
+        output_dir = f"schemas/{sheet_name}"
+        os.makedirs(output_dir, exist_ok=True)
+        print(f"📁 Output directory: {output_dir}")
 
-    with open(path, "w", encoding="utf-8") as f:
-        yaml.dump(clean_data, f, allow_unicode=True)
-    print(f"✅ SAVED: {path}")
+        # Process rows
+        for idx, row in df.iterrows():
+            # Skip empty rows
+            if row.dropna().empty:
+                continue
 
-def process_sheet_to_file(sheet_name, df_sheet):
-    """Process one sheet → save as main-data.json/.yaml in mapped folder"""
-    if df_sheet.empty:
-        print(f"⚠️ Sheet '{sheet_name}' is empty — skipping")
-        return
+            # HELP ARTICLES — SPECIAL HANDLING FOR UNIQUE FILENAMES
+            if sheet_name == "help-articles":
+                title = str(row.get('title', '')).strip()
+                slug = str(row.get('slug', '')).strip()
+                content = str(row.get('content', '')).strip()
 
-    # Take first row only → convert to clean dict
-    row_dict = df_sheet.iloc[0].to_dict()
+                # Generate unique filename
+                if not slug:
+                    slug = slugify(title) if title else f"article-{idx+1}"
 
-    # Get target folder name
-    folder_name = SHEET_TO_FOLDER.get(sheet_name, sheet_name.lower().replace(" ", "-"))
-    target_dir = os.path.join(OUTPUT_DIR, folder_name)
-    base_path = os.path.join(target_dir, "main-data")
+                base_slug = slug
+                counter = 1
+                filename = f"{slug}.md"
+                filepath = os.path.join(output_dir, filename)
 
-    # Save both formats
-    save_json(row_dict, base_path + ".json")
-    save_yaml(row_dict, base_path + ".yaml")
+                # Avoid filename collisions
+                while os.path.exists(filepath):
+                    filename = f"{base_slug}-{counter}.md"
+                    filepath = os.path.join(output_dir, filename)
+                    counter += 1
 
-def generate_all_files(input_file):
-    ensure_output_dir()
-    print(f"📄 Processing: {input_file}")
-    
-    # Load all sheets from XLSX
-    xls = pd.read_excel(input_file, sheet_name=None)  # Returns dict: sheet_name → DataFrame
-    print(f"📄 Sheets found: {list(xls.keys())}")
+                # Write Markdown file with frontmatter
+                try:
+                    with open(filepath, 'w', encoding='utf-8') as f:
+                        f.write("---\n")
+                        if title:
+                            f.write(f"title: {title}\n")
+                        f.write(f"slug: {slug}\n")
+                        f.write("---\n\n")
+                        f.write(content)
+                    print(f"✅ Generated: {filepath}")
+                except Exception as e:
+                    print(f"❌ Failed to write {filepath}: {e}")
 
-    for sheet_name, df_sheet in xls.items():
-        print(f"\n--- PROCESSING: {sheet_name} ---")
-        process_sheet_to_file(sheet_name, df_sheet)
+            # ALL OTHER SHEETS — USE SIMPLE INDEX-BASED NAMING (or ID if available)
+            else:
+                # Try to get a unique identifier
+                id_field = None
+                for key in ['id', 'service_id', 'faq_id', 'review_id', 'slug', 'name', 'title']:
+                    if key in row and pd.notna(row[key]):
+                        id_field = str(row[key]).strip()
+                        break
+                
+                if not id_field:
+                    id_field = f"item-{idx+1}"
 
-def main():
-    parser = argparse.ArgumentParser(description="Generate schema files from XLSX tabs")
-    parser.add_argument("--input", "-i", default=DEFAULT_DATA_FILE,
-                        help="Path to input .xlsx file")
-    args = parser.parse_args()
+                # Clean filename
+                safe_id = slugify(id_field)
+                base_id = safe_id
+                counter = 1
+                filename = f"{safe_id}.json"
+                filepath = os.path.join(output_dir, filename)
 
-    print("⚙️ Starting processing...")
-    generate_all_files(args.input)
-    print("🎉 SUCCESS: All schema files generated!")
+                # Avoid filename collisions
+                while os.path.exists(filepath):
+                    filename = f"{base_id}-{counter}.json"
+                    filepath = os.path.join(output_dir, filename)
+                    counter += 1
+
+                # Convert row to dict and save as JSON
+                item_data = {}
+                for col in df.columns:
+                    value = row[col]
+                    # Handle NaN/NaT
+                    if pd.isna(value):
+                        continue
+                    # Convert numpy types to native Python
+                    if hasattr(value, 'item'):
+                        value = value.item()
+                    item_data[col] = value
+
+                try:
+                    with open(filepath, 'w', encoding='utf-8') as f:
+                        json.dump(item_data, f, indent=2, ensure_ascii=False, default=str)
+                    print(f"✅ Generated: {filepath}")
+                except Exception as e:
+                    print(f"❌ Failed to write {filepath}: {e}")
+
+    print("\n🎉 All files generated successfully.")
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser(description='Generate schema files from Excel.')
+    parser.add_argument('--input', type=str, default='templates/client-data.xlsx',
+                        help='Path to input Excel file')
+    args = parser.parse_args()
+    main(args.input)
