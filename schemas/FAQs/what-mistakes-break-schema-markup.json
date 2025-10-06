@@ -1,0 +1,4 @@
+{
+  "question": "What mistakes break schema markup?",
+  "answer": "Invalid fields, missing required properties, or copy-paste errors make AI ignore your schema."
+}

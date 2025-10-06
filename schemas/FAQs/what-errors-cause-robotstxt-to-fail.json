@@ -1,0 +1,4 @@
+{
+  "question": "What errors cause robots.txt to fail?",
+  "answer": "Syntax errors, missing sitemap entries, or disallowing important pages."
+}

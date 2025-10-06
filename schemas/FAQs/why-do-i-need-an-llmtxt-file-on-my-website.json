@@ -1,0 +1,4 @@
+{
+  "question": "Why do I need an LLM.txt file on my website?",
+  "answer": "Without it, AI models may not know where to look for your structured content, leaving you out of answers."
+}

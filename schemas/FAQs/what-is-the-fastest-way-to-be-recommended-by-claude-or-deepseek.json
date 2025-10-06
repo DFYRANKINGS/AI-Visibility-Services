@@ -1,0 +1,4 @@
+{
+  "question": "What is the fastest way to be recommended by Claude or DeepSeek?",
+  "answer": "Structured schema + citations in knowledge bases like Wikidata and GitHub-hosted repos."
+}

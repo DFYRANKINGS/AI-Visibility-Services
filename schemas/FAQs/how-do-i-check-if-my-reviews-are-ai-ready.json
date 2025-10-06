@@ -1,0 +1,4 @@
+{
+  "question": "How do I check if my reviews are AI-ready?",
+  "answer": "Ensure reviews are in schema format and included in your AI-sitemap and LLM.txt file."
+}
