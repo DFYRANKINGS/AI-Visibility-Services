@@ -48,7 +48,8 @@ jobs:
           if [ -n "$FILES_TO_ADD" ]; then
             git add $FILES_TO_ADD
             git commit -m "AUTO: Update public HTML pages"
-            git push origin main
+            # 🔑 USE GITHUB_TOKEN TO AUTHENTICATE PUSH
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
             echo "🚀 Successfully pushed updated pages"
           else
             echo "❌ No HTML files to commit. Check earlier logs for errors."
