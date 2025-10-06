@@ -262,24 +262,40 @@ def generate_about_page():
     print("✅ about.html generated")
 
 def generate_faq_page():
-    faqs = load_data("schemas/faqs/faqs.json") or load_data("schemas/faqs/faqs.yaml")
-    if not faqs:
-        print("⚠️ No FAQs found — skipping faqs.html")
+    faq_dir = "schemas/FAQs"  # ← MATCH YOUR ACTUAL FOLDER NAME
+    if not os.path.exists(faq_dir):
+        print(f"⚠️ FAQ directory not found: {faq_dir} — skipping faqs.html")
         return
 
     items = []
-    for item in (faqs if isinstance(faqs, list) else [faqs]):
-        items.append(f"""
-        <div class="card">
-            <h3 style="margin: 0 0 0.5rem 0;">{escape_html(item.get('question', ''))}</h3>
-            <p>{escape_html(item.get('answer', ''))}</p>
-        </div>
-        """)
+    for file in os.listdir(faq_dir):
+        if file.endswith(".json"):
+            filepath = os.path.join(faq_dir, file)
+            faq_data = load_data(filepath)
+            if not faq_data:
+                continue
+            # Handle both single object and list
+            faq_list = faq_data if isinstance(faq_data, list) else [faq_data]
+            for item in faq_list:
+                question = item.get('question', '').strip()
+                answer = item.get('answer', '').strip()
+                if not question:
+                    continue
+                items.append(f"""
+                <div class="card">
+                    <h3 style="margin: 0 0 0.5rem 0;">{escape_html(question)}</h3>
+                    <p>{escape_html(answer)}</p>
+                </div>
+                """)
+
+    if not items:
+        print("⚠️ No valid FAQs found — skipping faqs.html")
+        return
 
     content = "".join(items)
     with open("faqs.html", "w", encoding="utf-8") as f:
         f.write(generate_page("Frequently Asked Questions", content))
-    print("✅ faqs.html generated")
+    print(f"✅ faqs.html generated ({len(items)} FAQs)")
 
 def generate_help_articles_page():
     articles = []
