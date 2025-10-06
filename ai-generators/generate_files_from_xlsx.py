@@ -15,24 +15,28 @@ def slugify(text):
 def main(input_file="templates/client-data.xlsx"):
     print(f"📂 Opening Excel file: {input_file}")
     
+    if not os.path.exists(input_file):
+        print(f"❌ FATAL: Excel file not found at {input_file}")
+        sys.exit(1)
+    else:
+        print(f"✅ Excel file confirmed at: {input_file}")
+
     try:
         xlsx = pd.ExcelFile(input_file)
-    except FileNotFoundError:
-        print(f"❌ Error: File '{input_file}' not found.")
-        sys.exit(1)
+        print(f"📄 Available sheets in workbook: {xlsx.sheet_names}")
     except Exception as e:
-        print(f"❌ Error loading Excel file: {e}")
+        print(f"❌ Failed to load Excel file: {e}")
         sys.exit(1)
 
     # Map your actual sheet names to output dirs
     sheet_config = {
         "organization": "schemas/organization",
-        "Services": "schemas/services",           # ← Your sheet name
+        "Services": "schemas/Services",           # ← Match folder case
         "Products": "schemas/products",
-        "FAQs": "schemas/faqs",                   # ← Your sheet name
-        "Help Articles": "schemas/Help Articles", # ← Your sheet name
-        "Reviews": "schemas/reviews",
-        "Locations": "schemas/locations",
+        "FAQs": "schemas/FAQs",                   # ← Match folder case
+        "Help Articles": "schemas/Help Articles", # ← Match folder case
+        "Reviews": "schemas/Reviews",
+        "Locations": "schemas/Locations",
         "Team": "schemas/team",
         "Awards & Certifications": "schemas/awards",
         "Press/News Mentions": "schemas/press",
@@ -48,6 +52,10 @@ def main(input_file="templates/client-data.xlsx"):
         print(f"\n📄 Processing sheet: {sheet_name}")
         df = xlsx.parse(sheet_name)
         
+        # CLEAN COLUMN NAMES — strip whitespace
+        df.columns = df.columns.str.strip()
+        print(f"🧹 Cleaned column names: {list(df.columns)}")
+
         if df.empty:
             print(f"⚠️ Sheet '{sheet_name}' is empty — skipping")
             continue
@@ -67,7 +75,15 @@ def main(input_file="templates/client-data.xlsx"):
             if sheet_name == "Help Articles":
                 title = str(row.get('title', '')).strip()
                 slug = str(row.get('slug', '')).strip()
-                content = str(row.get('article', '')).strip()  # ← You named the column "article"
+                content = str(row.get('article', '')).strip()  # ← Uses 'article' column
+
+                # DEBUG PRINT
+                print(f"📄 ROW {idx+1} → title='{title}' | slug='{slug}' | content_length={len(content)}")
+
+                # Skip if both title and content are empty
+                if not title and not content:
+                    print(f"⚠️ Skipping row {idx+1}: no title or content")
+                    continue
 
                 if not slug:
                     slug = slugify(title) if title else f"article-{idx+1}"
