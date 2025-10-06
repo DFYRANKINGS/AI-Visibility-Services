@@ -299,7 +299,7 @@ def generate_faq_page():
 
 def generate_help_articles_page():
     articles = []
-    help_dir = "schemas/help-articles"
+    help_dir = "schemas/Help Articles"
     if not os.path.exists(help_dir):
         print("⚠️ No help articles found — skipping help.html")
         return
