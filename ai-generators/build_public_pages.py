@@ -274,7 +274,7 @@ def generate_index_page():
     print("✅ index.html generated")
 
 def generate_about_page():
-    org_dir = "schemas/Organization"
+    org_dir = "schemas/organization"
     print(f"🔍 Scanning {org_dir} for organization data...")
 
     if not os.path.exists(org_dir):
