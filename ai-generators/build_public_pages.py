@@ -21,12 +21,35 @@ def slugify(text):
 
 def load_data(filepath):
     if not os.path.exists(filepath):
+        print(f"🔍 File not found: {filepath}")
         return []
-    with open(filepath, 'r', encoding='utf-8') as f:
-        if filepath.endswith('.yaml'):
-            return yaml.safe_load(f) or []
-        elif filepath.endswith('.json'):
-            return json.load(f) or []
+
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read().strip()
+            if not content:
+                print(f"⚠️ File is empty: {filepath}")
+                return []
+
+            if filepath.endswith('.yaml'):
+                data = yaml.safe_load(content) or []
+                if data is None:
+                    print(f"⚠️ YAML parsed as None: {filepath} — treating as empty")
+                    return []
+                return data if isinstance(data, list) else [data]
+
+            elif filepath.endswith('.json'):
+                data = json.loads(content) or []
+                if data is None:
+                    print(f"⚠️ JSON parsed as None: {filepath} — treating as empty")
+                    return []
+                return data if isinstance(data, list) else [data]
+
+    except Exception as e:
+        print(f"❌ Failed to load {filepath}: {e}")
+        return []
+
+    print(f"⚠️ Unsupported file type: {filepath}")
     return []
 
 def generate_nav():
