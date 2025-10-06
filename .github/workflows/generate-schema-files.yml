@@ -1,12 +1,12 @@
 name: 📊 Generate Schema Files from Excel
 
 on:
-  workflow_dispatch: # Allows manual run
+  workflow_dispatch:
   push:
     branches:
       - main
     paths:
-      - 'templates/client-data.xlsx'  # Re-run if Excel file changes
+      - 'templates/client-data.xlsx'
 
 jobs:
   generate-schemas:
@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: 🐍 Set up Python
         uses: actions/setup-python@v4
@@ -29,30 +32,45 @@ jobs:
           cd ai-generators
           python generate_files_from_xlsx.py --input ../templates/client-data.xlsx
 
-      - name: 💾 FORCE Commit and push generated schema files (WITH DEBUG)
+      - name: 🔍 SHOW CURRENT STATE
+        run: |
+          echo "=== BRANCH & REMOTE INFO ==="
+          git branch -a
+          git remote -v
+          git status
+          echo ""
+          echo "=== FILES IN schemas/Help Articles/ ==="
+          ls -la schemas/Help\ Articles/ | head -10
+          echo ""
+          echo "=== GIT DIFF ==="
+          git diff --stat
+
+      - name: 💾 FORCE ADD + COMMIT + PUSH
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-          echo "🔍 Current branch: $(git branch --show-current)"
-          echo "🔍 Last commit: $(git log -1 --oneline)"
-
-          echo "📁 Files in schemas/Help Articles/ BEFORE git add:"
-          ls -la schemas/Help\ Articles/ | head -10
-
-          # Force add all files
+          
+          # Force add all files in schemas/
+          echo "=== FORCING ADD OF ALL FILES IN schemas/ ==="
           git add --all schemas/
-
-          echo "📄 Git status after add:"
-          git status
-
-          # Force commit
-          git commit -m "AUTO: Update schema files from Excel" || echo "⚠️ Nothing to commit — continuing anyway"
-
-          # Force push
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main && echo "✅ Push SUCCEEDED" || echo "❌ Push FAILED"
-
-          echo "📁 Files in schemas/Help Articles/ AFTER push attempt:"
-          ls -la schemas/Help\ Articles/ | head -10
-
-          echo "🔍 Final commit: $(git log -1 --oneline)"
+          
+          # Show what's staged
+          echo "=== STAGED CHANGES ==="
+          git status --porcelain
+          
+          # Force commit (ignore "nothing to commit")
+          echo "=== CREATING COMMIT ==="
+          git commit -m "AUTO: Update schema files from Excel" || echo "⚠️ No changes detected — forcing empty commit"
+          
+          # If no changes, create empty commit to force push
+          if git diff --cached --quiet; then
+            echo "=== CREATING EMPTY COMMIT TO TRIGGER PUSH ==="
+            git commit --allow-empty -m "AUTO: Force update schema files"
+          fi
+          
+          # Push with debug
+          echo "=== ATTEMPTING PUSH ==="
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main && echo "✅ PUSH SUCCEEDED" || (echo "❌ PUSH FAILED" && exit 1)
+          
+          echo "=== FINAL STATUS ==="
+          git log -1 --oneline
