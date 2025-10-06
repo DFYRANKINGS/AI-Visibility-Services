@@ -1,0 +1,4 @@
+{
+  "question": "What mistakes break my AI-sitemap?",
+  "answer": "Missing lastmod dates, empty file links, or pointing to placeholders instead of real URLs."
+}

@@ -1,0 +1,4 @@
+{
+  "question": "How should reviews be structured for AI visibility?",
+  "answer": "Reviews should be marked up with Review schema and connected to your business in JSON/YAML."
+}

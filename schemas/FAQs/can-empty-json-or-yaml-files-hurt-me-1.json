@@ -1,0 +1,4 @@
+{
+  "question": "Can empty JSON or YAML files hurt me?",
+  "answer": "Yes, empty files signal poor maintenance and reduce AI trust in your business."
+}

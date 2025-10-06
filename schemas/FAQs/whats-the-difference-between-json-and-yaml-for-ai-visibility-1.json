@@ -1,0 +1,4 @@
+{
+  "question": "What’s the difference between JSON and YAML for AI visibility?",
+  "answer": "Both are machine-readable. JSON is more universal, YAML is lighter. Publishing both maximizes AI indexing."
+}

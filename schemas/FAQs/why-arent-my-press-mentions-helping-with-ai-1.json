@@ -1,0 +1,4 @@
+{
+  "question": "Why aren’t my press mentions helping with AI?",
+  "answer": "They may not be structured properly or linked in your AI-sitemap or LLM.txt file."
+}
