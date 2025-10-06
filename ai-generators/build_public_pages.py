@@ -99,10 +99,8 @@ def generate_page(title, content):
 
 def generate_contact_page():
     possible_paths = [
-        "schemas/Locations/locations.json",
-        "schemas/Locations/locations.yaml",
-        "schemas/locations.json",
-        "schemas/locations.yaml",
+        "schemas/Locations/item-1.json",
+        "schemas/Locations/item-2.json",
     ]
 
     contacts = None
