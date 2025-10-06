@@ -98,51 +98,49 @@ def generate_page(title, content):
 </html>"""
 
 def generate_contact_page():
-    possible_paths = [
-        "schemas/Locations/item-1.json",
-        "schemas/Locations/item-2.json",
-    ]
-
-    contacts = None
-    found_path = None
-    for path in possible_paths:
-        if os.path.exists(path):
-            contacts = load_data(path)
-            found_path = path
-            print(f"📁 Found contact data: {path}")
-            break
-
-    if not contacts:
-        print(f"⚠️ No contact/location data found. Looked in: {possible_paths}")
+    locations_dir = "schemas/Locations"  # ← EXACT MATCH TO YOUR FOLDER
+    if not os.path.exists(locations_dir):
+        print(f"⚠️ Locations directory not found: {locations_dir} — skipping contact.html")
         return
 
     items = []
-    for loc in (contacts if isinstance(contacts, list) else [contacts]):
-        name = loc.get('name') or loc.get('location_name') or 'Location'
-        address = loc.get('address') or ''
-        phone = loc.get('phone') or ''
-        email = loc.get('email') or ''
-        hours = loc.get('hours') or ''
-        map_url = loc.get('map_embed_url') or loc.get('google_maps_url') or ''
+    for file in os.listdir(locations_dir):
+        if file.endswith((".json", ".yaml")):
+            filepath = os.path.join(locations_dir, file)
+            loc_data = load_data(filepath)
+            if not loc_data:
+                continue
+            loc_list = loc_data if isinstance(loc_data, list) else [loc_data]
+            for loc in loc_list:
+                name = loc.get('name') or loc.get('location_name') or 'Location'
+                address = loc.get('address') or ''
+                phone = loc.get('phone') or ''
+                email = loc.get('email') or ''
+                hours = loc.get('hours') or ''
+                map_url = loc.get('map_embed_url') or loc.get('google_maps_url') or ''
 
-        item_html = f"""
-        <div class="card">
-            <h3>{escape_html(name)}</h3>
-            {f'<p><strong>Address:</strong> {escape_html(address)}</p>' if address else ''}
-            {f'<p><strong>Phone:</strong> {escape_html(phone)}</p>' if phone else ''}
-            {f'<p><strong>Email:</strong> <a href="mailto:{email}">{escape_html(email)}</a></p>' if email else ''}
-            {f'<p><strong>Hours:</strong> {escape_html(hours)}</p>' if hours else ''}
-        """
+                item_html = f"""
+                <div class="card">
+                    <h3>{escape_html(name)}</h3>
+                    {f'<p><strong>Address:</strong> {escape_html(address)}</p>' if address else ''}
+                    {f'<p><strong>Phone:</strong> {escape_html(phone)}</p>' if phone else ''}
+                    {f'<p><strong>Email:</strong> <a href="mailto:{email}">{escape_html(email)}</a></p>' if email else ''}
+                    {f'<p><strong>Hours:</strong> {escape_html(hours)}</p>' if hours else ''}
+                """
 
-        if map_url:
-            item_html += f'''
-            <div style="margin-top: 1rem;">
-                <iframe src="{escape_html(map_url)}" width="100%" height="300" style="border:0; border-radius: 8px;" allowfullscreen loading="lazy"></iframe>
-            </div>
-            '''
+                if map_url:
+                    item_html += f'''
+                    <div style="margin-top: 1rem;">
+                        <iframe src="{escape_html(map_url)}" width="100%" height="300" style="border:0; border-radius: 8px;" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    '''
 
-        item_html += "</div>"
-        items.append(item_html)
+                item_html += "</div>"
+                items.append(item_html)
+
+    if not items:
+        print("⚠️ No valid locations found — skipping contact.html")
+        return
 
     content = "".join(items)
     with open("contact.html", "w", encoding="utf-8") as f:
@@ -150,16 +148,9 @@ def generate_contact_page():
     print(f"✅ contact.html generated ({len(items)} locations)")
     
 def generate_services_page():
-    possible_dirs = ["schemas/services", "schemas/Services"]
-    services_dir = None
-    for d in possible_dirs:
-        if os.path.exists(d):
-            services_dir = d
-            print(f"📁 Found services folder: {d}")
-            break
-
-    if not services_dir:
-        print(f"⚠️ Services directory not found. Looked for: {possible_dirs}")
+    services_dir = "schemas/Services"  # ← EXACT MATCH TO YOUR FOLDER
+    if not os.path.exists(services_dir):
+        print(f"⚠️ Services directory not found: {services_dir} — skipping services.html")
         return
 
     items = []
@@ -196,18 +187,11 @@ def generate_services_page():
     with open("services.html", "w", encoding="utf-8") as f:
         f.write(generate_page("Our Services", content))
     print(f"✅ services.html generated ({len(items)} services)")
-
+    
 def generate_testimonials_page():
-    possible_dirs = ["schemas/reviews", "schemas/Reviews", "schemas/testimonials", "schemas/Testimonials"]
-    reviews_dir = None
-    for d in possible_dirs:
-        if os.path.exists(d):
-            reviews_dir = d
-            print(f"📁 Found reviews folder: {d}")
-            break
-
-    if not reviews_dir:
-        print(f"⚠️ Reviews/Testimonials directory not found. Looked for: {possible_dirs}")
+    reviews_dir = "schemas/Reviews"  # ← EXACT MATCH TO YOUR FOLDER
+    if not os.path.exists(reviews_dir):
+        print(f"⚠️ Reviews directory not found: {reviews_dir} — skipping testimonials.html")
         return
 
     items = []
