@@ -60,9 +60,11 @@ def main(input_file="templates/client-data.xlsx"):
             print(f"⚠️ Sheet '{sheet_name}' is empty — skipping")
             continue
 
-        output_dir = sheet_config[sheet_name]
+        # Ensure output_dir is relative to repo root, not ai-generators/
+        output_dir = os.path.join("..", sheet_config[sheet_name])
         os.makedirs(output_dir, exist_ok=True)
-        print(f"📁 Output directory: {output_dir}")
+        print(f"📁 Output directory (ABSOLUTE): {os.path.abspath(output_dir)}")
+        print(f"📁 Output directory (RELATIVE): {output_dir}")
 
         processed_count = 0
 
