@@ -32,15 +32,27 @@ jobs:
           cd ai-generators
           python build_public_pages.py
 
-      - name: 💾 Commit and push generated files (if changed)
+           - name: 💾 Commit and push generated files (if any)
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add help.html faqs.html services.html testimonials.html contact.html about.html index.html
-          git status
-          if ! git diff --cached --quiet; then
+
+          FILES_TO_ADD=""
+          for f in help.html faqs.html services.html testimonials.html contact.html about.html index.html; do
+            if [ -f "$f" ]; then
+              FILES_TO_ADD="$FILES_TO_ADD $f"
+              echo "✅ Found $f — will commit"
+            else
+              echo "⚠️ $f not found — skipping"
+            fi
+          done
+
+          if [ -n "$FILES_TO_ADD" ]; then
+            git add $FILES_TO_ADD
             git commit -m "AUTO: Update public HTML pages"
             git push origin main
+            echo "🚀 Successfully pushed updated pages"
           else
-            echo "No changes to commit."
+            echo "❌ No HTML files to commit. Check earlier logs for errors."
+            exit 1
           fi
