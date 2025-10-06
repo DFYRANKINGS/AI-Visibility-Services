@@ -29,23 +29,11 @@ jobs:
           cd ai-generators
           python generate_files_from_xlsx.py --input ../templates/client-data.xlsx
 
-            - name: 💾 FORCE Commit and push generated schema files
+      - name: 💾 FORCE Commit and push generated schema files
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Force add all files in schemas/ (even if Git thinks they're unchanged)
           git add --all schemas/
-
-          # Force commit even if no changes detected
           git commit -m "AUTO: Update schema files from Excel" || echo "⚠️ Nothing to commit — forcing push anyway"
-
-          # Force push to main
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main || echo "❌ Push failed"
-
           echo "✅ Attempted to commit and push schema files (forced)"
-
-      - name: ▶️ Trigger HTML page build (optional)
-        if: always()
-        run: |
-          echo "✅ Schema generation complete. You can now run 'Build Public HTML Pages' workflow."
