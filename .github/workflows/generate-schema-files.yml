@@ -29,11 +29,30 @@ jobs:
           cd ai-generators
           python generate_files_from_xlsx.py --input ../templates/client-data.xlsx
 
-      - name: 💾 FORCE Commit and push generated schema files
+      - name: 💾 FORCE Commit and push generated schema files (WITH DEBUG)
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          echo "🔍 Current branch: $(git branch --show-current)"
+          echo "🔍 Last commit: $(git log -1 --oneline)"
+
+          echo "📁 Files in schemas/Help Articles/ BEFORE git add:"
+          ls -la schemas/Help\ Articles/ | head -10
+
+          # Force add all files
           git add --all schemas/
-          git commit -m "AUTO: Update schema files from Excel" || echo "⚠️ Nothing to commit — forcing push anyway"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main || echo "❌ Push failed"
-          echo "✅ Attempted to commit and push schema files (forced)"
+
+          echo "📄 Git status after add:"
+          git status
+
+          # Force commit
+          git commit -m "AUTO: Update schema files from Excel" || echo "⚠️ Nothing to commit — continuing anyway"
+
+          # Force push
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main && echo "✅ Push SUCCEEDED" || echo "❌ Push FAILED"
+
+          echo "📁 Files in schemas/Help Articles/ AFTER push attempt:"
+          ls -la schemas/Help\ Articles/ | head -10
+
+          echo "🔍 Final commit: $(git log -1 --oneline)"
