@@ -328,6 +328,16 @@ def generate_help_articles_page():
 
 if __name__ == "__main__":
     print("🏗️ Starting public page generation...")
+    os.chdir("..")
+    print(f"📂 Switched to directory: {os.getcwd()}")
+
+    # List files BEFORE generation (for debugging)
+    print("\n📄 Files in current directory BEFORE generation:")
+    for f in os.listdir("."):
+        if f.endswith(('.html', '.md', '.json')):
+            print(f"  - {f}")
+
+    # Generate all pages
     generate_index_page()
     generate_about_page()
     generate_services_page()
@@ -335,4 +345,16 @@ if __name__ == "__main__":
     generate_faq_page()
     generate_help_articles_page()
     generate_contact_page()
+
+    print("\n📄 Files in current directory AFTER generation:")
+    generated_files = []
+    for f in os.listdir("."):
+        if f.endswith('.html'):
+            print(f"  - {f}")
+            generated_files.append(f)
+
+    if not generated_files:
+        print("❌ ERROR: No .html files were generated. Check schema directories and script logic.")
+        sys.exit(1)  # ← This will FAIL the workflow on purpose if nothing was generated
+
     print("🎉 All public pages generated successfully.")
