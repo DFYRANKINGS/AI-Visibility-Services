@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /schema-files/
 Allow: /ai-sitemap.xml
-Sitemap: https://raw.githubusercontent.com/DFYRANKINGS/_________________/main/ai-sitemap.xml
+Sitemap: https://raw.githubusercontent.com/DFYRANKINGS/AI-Visibility-Services/main/ai-sitemap.xml
 
 # Explicitly invite AI crawlers
 User-agent: GPTBot
@@ -25,6 +25,11 @@ Allow: /
 User-agent: FacebookBot  # For Meta AI
 Allow: /
 
+User-agent: *
+Allow: /
+Sitemap: https://data.aiovisibility.com/sitemap.xml
+
 User-agent: anthropic-ai
 
 Allow: /
+
