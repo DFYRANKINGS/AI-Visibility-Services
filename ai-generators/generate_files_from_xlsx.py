@@ -30,7 +30,7 @@ def main(input_file="templates/client-data.xlsx"):
         "Services": "schemas/services",           # ← Your sheet name
         "Products": "schemas/products",
         "FAQs": "schemas/faqs",                   # ← Your sheet name
-        "Help Articles": "schemas/help-articles", # ← Your sheet name
+        "Help Articles": "schemas/Help Articles", # ← Your sheet name
         "Reviews": "schemas/reviews",
         "Locations": "schemas/locations",
         "Team": "schemas/team",
