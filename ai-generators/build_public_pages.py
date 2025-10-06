@@ -274,36 +274,61 @@ def generate_index_page():
     print("✅ index.html generated")
 
 def generate_about_page():
-    possible_paths = [
-        "schemas/organization/organization.json",
-        "schemas/organization/organization.yaml",
-        "schemas/Organization/organization.json",
-        "schemas/Organization/organization.yaml",
-    ]
+    org_dir = "schemas/Organization"
+    print(f"🔍 Scanning {org_dir} for organization data...")
 
-    org_data = None
-    found_path = None
-    for path in possible_paths:
-        if os.path.exists(path):
-            org_data = load_data(path)
-            found_path = path
-            break
-
-    if not org_data:
-        print("⚠️ No organization data found — skipping about.html")
-        print(f"Looked in: {possible_paths}")
+    if not os.path.exists(org_dir):
+        print(f"❌ Directory not found: {org_dir} — skipping about.html")
         return
 
-    org = org_data[0] if isinstance(org_data, list) else org_data
-    content = f"""
-    {f'<img src="{escape_html(org.get("logo_url", ""))}" alt="{escape_html(org.get("name", "Company"))}" style="max-height: 120px; margin-bottom: 2rem;">' if org.get("logo_url") else ''}
-    <p>{escape_html(org.get('description', ''))}</p>
-    {f'<h2>Our Mission</h2><p>{escape_html(org.get("mission", ""))}</p>' if org.get("mission") else ''}
-    {f'<h2>Our Vision</h2><p>{escape_html(org.get("vision", ""))}</p>' if org.get("vision") else ''}
-    """
+    # Look for any .json file in the folder
+    json_files = [f for f in os.listdir(org_dir) if f.endswith('.json')]
+    if not json_files:
+        print(f"❌ No .json files found in {org_dir} — skipping about.html")
+        return
+
+    # Use the first .json file found
+    first_file = json_files[0]
+    filepath = os.path.join(org_dir, first_file)
+    print(f"📄 Using: {first_file}")
+
+    orgs = load_data(filepath)
+    if not orgs:
+        print(f"❌ Failed to load data from {first_file} — skipping about.html")
+        return
+
+    org = orgs[0] if isinstance(orgs, list) else orgs
+
+    # Build content from available fields
+    content_parts = []
+
+    if org.get('logo_url') or org.get('logo'):
+        logo_url = org.get('logo_url') or org.get('logo')
+        content_parts.append(f'<img src="{escape_html(logo_url)}" alt="{escape_html(org.get("name", "Company"))}" style="max-height: 120px; margin-bottom: 2rem;">')
+
+    if org.get('description'):
+        content_parts.append(f"<p>{escape_html(org.get('description'))}</p>")
+
+    if org.get('mission'):
+        content_parts.append(f"<h2>Our Mission</h2><p>{escape_html(org.get('mission'))}</p>")
+
+    if org.get('vision'):
+        content_parts.append(f"<h2>Our Vision</h2><p>{escape_html(org.get('vision'))}</p>")
+
+    if org.get('tagline') or org.get('slogan'):
+        tagline = org.get('tagline') or org.get('slogan')
+        content_parts.append(f"<h2>Our Promise</h2><p>{escape_html(tagline)}</p>")
+
+    if not content_parts:
+        print("⚠️ No usable fields found in JSON — skipping about.html")
+        return
+
+    content = "\n".join(content_parts)
+
     with open("about.html", "w", encoding="utf-8") as f:
         f.write(generate_page("About Us", content))
-    print("✅ about.html generated")
+
+    print("✅ about.html generated successfully")
 
 def generate_faq_page():
     faq_dir = "schemas/FAQs"  # ← MATCH YOUR ACTUAL FOLDER NAME
