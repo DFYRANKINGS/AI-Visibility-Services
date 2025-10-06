@@ -342,64 +342,65 @@ def generate_faq_page():
     print(f"✅ faqs.html generated ({len(items)} FAQs)")
 
 def generate_help_articles_page():
-    articles = []
-    help_dir = "schemas/Help Articles"
+    help_dir = "schemas/Help Articles"   # ← Confirm this matches EXACTLY
+    print(f"🔍 Looking for help articles in: {help_dir}")
     if not os.path.exists(help_dir):
-        print("⚠️ No help articles found — skipping help.html")
+        print(f"❌ Folder not found: {help_dir}")
         return
 
-    for file in os.listdir(help_dir):
-        if file.endswith(".md"):
-            filepath = os.path.join(help_dir, file)
-            with open(filepath, 'r', encoding='utf-8') as f:
-                content = f.read()
+    files_found = [f for f in os.listdir(help_dir) if f.endswith(".md")]
+    print(f"📄 Found {len(files_found)} .md files: {files_found[:3]}...")
 
-            # Parse frontmatter (if any)
-            title = None
-            body_lines = []
-            in_frontmatter = False
-            frontmatter_done = False
+    articles = []
+    for file in files_found:
+        filepath = os.path.join(help_dir, file)
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
 
-            for line in content.splitlines():
-                if line.strip() == "---" and not frontmatter_done:
-                    if not in_frontmatter:
-                        in_frontmatter = True
-                    else:
-                        in_frontmatter = False
-                        frontmatter_done = True
-                    continue
+        # Parse frontmatter
+        title = None
+        body_lines = []
+        in_frontmatter = False
+        frontmatter_done = False
 
-                if in_frontmatter and not frontmatter_done:
-                    if line.lower().startswith("title:"):
-                        title = line.split(":", 1)[1].strip()
+        for line in content.splitlines():
+            if line.strip() == "---" and not frontmatter_done:
+                if not in_frontmatter:
+                    in_frontmatter = True
                 else:
-                    body_lines.append(line)
+                    in_frontmatter = False
+                    frontmatter_done = True
+                continue
 
-            if not title:
-                title = file.replace(".md", "").replace("-", " ").title()
+            if in_frontmatter and not frontmatter_done:
+                if line.lower().startswith("title:"):
+                    title = line.split(":", 1)[1].strip()
+            else:
+                body_lines.append(line)
 
-            # Convert Markdown-like lines to simple HTML
-            html_lines = []
-            for line in body_lines:
-                if line.startswith("## "):
-                    html_lines.append(f"<h2>{escape_html(line[3:])}</h2>")
-                elif line.startswith("# "):
-                    html_lines.append(f"<h1>{escape_html(line[2:])}</h1>")
-                elif line.startswith("- ") or line.startswith("* "):
-                    # Simple bullet list handling
-                    html_lines.append(f"<p>• {escape_html(line[2:])}</p>")
-                elif line.strip() == "":
-                    html_lines.append("<br/>")
-                else:
-                    html_lines.append(f"<p>{escape_html(line)}</p>")
+        if not title:
+            title = file.replace(".md", "").replace("-", " ").title()
 
-            article_html = f"""
-            <div class="card">
-                <h2>{escape_html(title)}</h2>
-                {''.join(html_lines)}
-            </div>
-            """
-            articles.append(article_html)
+        html_lines = []
+        for line in body_lines:
+            if line.startswith("## "):
+                html_lines.append(f"<h2>{escape_html(line[3:])}</h2>")
+            elif line.startswith("# "):
+                html_lines.append(f"<h1>{escape_html(line[2:])}</h1>")
+            elif line.startswith("- ") or line.startswith("* "):
+                html_lines.append(f"<p>• {escape_html(line[2:])}</p>")
+            elif line.strip() == "":
+                html_lines.append("<br/>")
+            else:
+                html_lines.append(f"<p>{escape_html(line)}</p>")
+
+        article_html = f"""
+        <div class="card">
+            <h2>{escape_html(title)}</h2>
+            {''.join(html_lines)}
+        </div>
+        """
+        articles.append(article_html)
 
     if not articles:
         print("⚠️ No valid help articles found — skipping help.html")
@@ -408,8 +409,8 @@ def generate_help_articles_page():
     content = "".join(articles)
     with open("help.html", "w", encoding="utf-8") as f:
         f.write(generate_page("Help Center", content))
-    print("✅ help.html generated")
-
+    print(f"✅ help.html generated ({len(articles)} articles)")
+    
 if __name__ == "__main__":
     print("🏗️ Starting public page generation...")
     os.chdir("..")
