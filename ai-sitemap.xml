@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://raw.githubusercontent.com/DFYRANKINGS/AI-Visibility-Services/main/README.md</loc>
+    <lastmod>2025-10-05T16:45:23+00:00</lastmod>
+  </url>
+    <url>
     <loc>https://raw.githubusercontent.com/DFYRANKINGS/AI-Visibility-Services/main/schema-files/awards/main-data.json</loc>
     <lastmod>2025-10-05T16:45:23+00:00</lastmod>
   </url>
@@ -78,6 +82,14 @@
   </url>
   <url>
     <loc>https://raw.githubusercontent.com/DFYRANKINGS/AI-Visibility-Services/main/schema-files/services/main-data.yaml</loc>
+    <lastmod>2025-10-05T16:45:23+00:00</lastmod>
+  </url>
+    <url>
+    <loc>https://data.aiovisibility.com</loc>
+    <lastmod>2025-10-05T16:45:23+00:00</lastmod>
+  </url>
+    <url>
+    <loc>https://aiovisibility.com</loc>
     <lastmod>2025-10-05T16:45:23+00:00</lastmod>
   </url>
 </urlset>
