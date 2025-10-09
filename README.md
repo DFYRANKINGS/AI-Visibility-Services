@@ -1,4 +1,25 @@
-# Client AI Data Template
+# AI Visibility Services
+
+This repo generates AI-ready schema files from Excel → auto-builds public HTML pages.
+
+## Branches
+
+- `main` — Source of truth. Serves live site at `https://data.aiovisibility.com/`
+- (deleted) `gh-pages` — Old deployment branch (no longer used)
+
+## Workflow
+
+1. Update `templates/client-data.xlsx`
+2. Run “📊 Generate Schema Files from Excel” workflow
+3. Run “🏗️ Build Public HTML Pages” workflow
+4. Site auto-updates at `https://data.aiovisibility.com/`
+
+## Pages
+
+- `/index.html` — Homepage
+- `/help.html` — 263+ help articles
+- `/faqs.html` — 583+ FAQs
+- `/services.html`, `/testimonials.html`, `/contact.html`, `/about.html` — All auto-generated
 
 A comprehensive template repository for creating AI-optimized client data systems with automated workflows, structured data generation, and multi-platform content distribution.
 
