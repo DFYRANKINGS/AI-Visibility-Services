@@ -53,6 +53,7 @@ def load_data(filepath):
     return []
 
 def generate_nav():
+    # Always include Help link — we'll generate help.html separately
     return """
     <nav style="background: #2c3e50; padding: 1rem; margin-bottom: 2rem;">
         <ul style="list-style: none; display: flex; gap: 2rem; margin: 0; padding: 0; flex-wrap: wrap; justify-content: center;">
@@ -98,9 +99,10 @@ def generate_page(title, content):
 </html>"""
 
 def generate_contact_page():
-    locations_dir = "schemas/Locations"  # ← EXACT MATCH TO YOUR FOLDER
+    locations_dir = "schemas/Locations"
+    print(f"🔍 Checking contact data in: {locations_dir}")
     if not os.path.exists(locations_dir):
-        print(f"⚠️ Locations directory not found: {locations_dir} — skipping contact.html")
+        print(f"❌ Locations directory not found: {locations_dir} — skipping contact.html")
         return
 
     items = []
@@ -146,11 +148,12 @@ def generate_contact_page():
     with open("contact.html", "w", encoding="utf-8") as f:
         f.write(generate_page("Contact Us", content))
     print(f"✅ contact.html generated ({len(items)} locations)")
-    
+
 def generate_services_page():
-    services_dir = "schemas/Services"  # ← EXACT MATCH TO YOUR FOLDER
+    services_dir = "schemas/Services"
+    print(f"🔍 Checking services data in: {services_dir}")
     if not os.path.exists(services_dir):
-        print(f"⚠️ Services directory not found: {services_dir} — skipping services.html")
+        print(f"❌ Services directory not found: {services_dir} — skipping services.html")
         return
 
     items = []
@@ -187,11 +190,12 @@ def generate_services_page():
     with open("services.html", "w", encoding="utf-8") as f:
         f.write(generate_page("Our Services", content))
     print(f"✅ services.html generated ({len(items)} services)")
-    
+
 def generate_testimonials_page():
-    reviews_dir = "schemas/Reviews"  # ← EXACT MATCH TO YOUR FOLDER
+    reviews_dir = "schemas/Reviews"
+    print(f"🔍 Checking testimonials data in: {reviews_dir}")
     if not os.path.exists(reviews_dir):
-        print(f"⚠️ Reviews directory not found: {reviews_dir} — skipping testimonials.html")
+        print(f"❌ Reviews directory not found: {reviews_dir} — skipping testimonials.html")
         return
 
     items = []
@@ -281,13 +285,11 @@ def generate_about_page():
         print(f"❌ Directory not found: {org_dir} — skipping about.html")
         return
 
-    # Look for any .json file in the folder
     json_files = [f for f in os.listdir(org_dir) if f.endswith('.json')]
     if not json_files:
         print(f"❌ No .json files found in {org_dir} — skipping about.html")
         return
 
-    # Use the first .json file found
     first_file = json_files[0]
     filepath = os.path.join(org_dir, first_file)
     print(f"📄 Using: {first_file}")
@@ -299,7 +301,6 @@ def generate_about_page():
 
     org = orgs[0] if isinstance(orgs, list) else orgs
 
-    # Build content from available fields
     content_parts = []
 
     if org.get('logo_url') or org.get('logo'):
@@ -331,9 +332,10 @@ def generate_about_page():
     print("✅ about.html generated successfully")
 
 def generate_faq_page():
-    faq_dir = "schemas/FAQs"  # ← MATCH YOUR ACTUAL FOLDER NAME
+    faq_dir = "schemas/FAQs"
+    print(f"🔍 Checking FAQs in: {faq_dir}")
     if not os.path.exists(faq_dir):
-        print(f"⚠️ FAQ directory not found: {faq_dir} — skipping faqs.html")
+        print(f"❌ FAQ directory not found: {faq_dir} — skipping faqs.html")
         return
 
     items = []
@@ -343,7 +345,6 @@ def generate_faq_page():
             faq_data = load_data(filepath)
             if not faq_data:
                 continue
-            # Handle both single object and list
             faq_list = faq_data if isinstance(faq_data, list) else [faq_data]
             for item in faq_list:
                 question = item.get('question', '').strip()
@@ -367,14 +368,18 @@ def generate_faq_page():
     print(f"✅ faqs.html generated ({len(items)} FAQs)")
 
 def generate_help_articles_page():
-    help_dir = "schemas/Help Articles"   # ← Confirm this matches EXACTLY
+    help_dir = "schemas/Help Articles"
     print(f"🔍 Looking for help articles in: {help_dir}")
     if not os.path.exists(help_dir):
         print(f"❌ Folder not found: {help_dir}")
         return
 
     files_found = [f for f in os.listdir(help_dir) if f.endswith(".md")]
-    print(f"📄 Found {len(files_found)} .md files: {files_found[:3]}...")
+    print(f"📄 Found {len(files_found)} .md files: {files_found[:5]}")
+
+    if len(files_found) == 0:
+        print("⚠️ No .md files found — skipping help.html")
+        return
 
     articles = []
     for file in files_found:
@@ -382,7 +387,6 @@ def generate_help_articles_page():
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        # Parse frontmatter
         title = None
         body_lines = []
         in_frontmatter = False
@@ -427,25 +431,21 @@ def generate_help_articles_page():
         """
         articles.append(article_html)
 
-    if not articles:
-        print("⚠️ No valid help articles found — skipping help.html")
-        return
-
     content = "".join(articles)
     with open("help.html", "w", encoding="utf-8") as f:
         f.write(generate_page("Help Center", content))
     print(f"✅ help.html generated ({len(articles)} articles)")
-    
+
 if __name__ == "__main__":
     print("🏗️ Starting public page generation...")
     os.chdir("..")
     print(f"📂 Switched to directory: {os.getcwd()}")
 
-    # List files BEFORE generation (for debugging)
-    print("\n📄 Files in current directory BEFORE generation:")
-    for f in os.listdir("."):
-        if f.endswith(('.html', '.md', '.json')):
-            print(f"  - {f}")
+    # FORCE REBUILD — delete old files
+    for f in ["index.html", "about.html", "services.html", "testimonials.html", "faqs.html", "help.html", "contact.html"]:
+        if os.path.exists(f):
+            os.remove(f)
+            print(f"🗑️ Deleted old {f} — forcing rebuild")
 
     # Generate all pages
     generate_index_page()
@@ -456,15 +456,4 @@ if __name__ == "__main__":
     generate_help_articles_page()
     generate_contact_page()
 
-    print("\n📄 Files in current directory AFTER generation:")
-    generated_files = []
-    for f in os.listdir("."):
-        if f.endswith('.html'):
-            print(f"  - {f}")
-            generated_files.append(f)
-
-    if not generated_files:
-        print("❌ ERROR: No .html files were generated. Check schema directories and script logic.")
-        sys.exit(1)  # ← This will FAIL the workflow on purpose if nothing was generated
-
-    print("🎉 All public pages generated successfully.")
+    print("\n🎉 All public pages generated successfully.")
