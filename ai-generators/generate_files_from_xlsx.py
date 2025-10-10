@@ -95,10 +95,17 @@ def main(input_file="templates/client-data.xlsx"):
                 filename = f"{slug}.md"
                 filepath = os.path.join(output_dir, filename)
 
-                while os.path.exists(filepath):
-                    filename = f"{base_slug}-{counter}.md"
-                    filepath = os.path.join(output_dir, filename)
-                    counter += 1
+                  # OVERWRITE existing file — no duplicates
+                base_pattern = f"{base_slug}*.md"
+                for existing_file in os.listdir(output_dir):
+                    if existing_file.startswith(base_slug) and existing_file.endswith('.md'):
+                        try:
+                            os.remove(os.path.join(output_dir, existing_file))
+                            print(f"🗑️ Removed duplicate: {existing_file}")
+                        except Exception as e:
+                            print(f"❌ Failed to remove {existing_file}: {e}")
+
+                filepath = os.path.join(output_dir, filename)  # Use original filename
 
                 try:
                     with open(filepath, 'w', encoding='utf-8') as f:
@@ -127,10 +134,18 @@ def main(input_file="templates/client-data.xlsx"):
                 filename = f"{safe_id}.json"
                 filepath = os.path.join(output_dir, filename)
 
-                while os.path.exists(filepath):
-                    filename = f"{base_id}-{counter}.json"
-                    filepath = os.path.join(output_dir, filename)
-                    counter += 1
+                # OVERWRITE existing file — no duplicates
+                # Remove any existing -1, -2, etc. versions of this FAQ
+                base_pattern = f"{base_id}*.json"
+                for existing_file in os.listdir(output_dir):
+                    if existing_file.startswith(base_id) and existing_file.endswith('.json'):
+                        try:
+                            os.remove(os.path.join(output_dir, existing_file))
+                            print(f"🗑️ Removed duplicate: {existing_file}")
+                        except Exception as e:
+                            print(f"❌ Failed to remove {existing_file}: {e}")
+
+                filepath = os.path.join(output_dir, filename)  # Use original filename
 
                 item_data = {
                     "question": question,
