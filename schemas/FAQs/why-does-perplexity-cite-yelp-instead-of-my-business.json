@@ -1,0 +1,4 @@
+{
+  "question": "Why does Perplexity cite Yelp instead of my business?",
+  "answer": "Yelp provides structured data. We publish yours in AI-sitemaps so bots cite your business directly, not the middlemen."
+}

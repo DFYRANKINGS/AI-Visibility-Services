@@ -1,0 +1,4 @@
+{
+  "question": "What mistakes happen with YAML files?",
+  "answer": "Incorrect indentation or structure that breaks parsing for AI engines."
+}

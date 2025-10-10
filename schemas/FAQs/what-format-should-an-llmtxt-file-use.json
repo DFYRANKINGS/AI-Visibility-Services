@@ -1,0 +1,4 @@
+{
+  "question": "What format should an LLM.txt file use?",
+  "answer": "It should be plain text with links to your JSON, YAML, and other structured files."
+}
