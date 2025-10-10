@@ -1,7 +1,0 @@
-{
-  "client_name": "DFY AI Visibility",
-  "article_id": "help-85-ai-schema-setup",
-  "title": "Schema Setup: Getting Started With AI-Ready Markup",
-  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
-  "article": "### Guide\n### First Steps\nSchema setup is the foundation of AI visibility. It defines what assistants can verify about your business.\n\n### How to Begin\n- Start with Organization, Service, and Review schema.\n- Host JSON and YAML files in a public repo.\n- Reference everything in an AI sitemap.\n\n### Pro Tip\nConsistent schema setup ensures your brand’s information appears in AI recommendations and summaries."
-}

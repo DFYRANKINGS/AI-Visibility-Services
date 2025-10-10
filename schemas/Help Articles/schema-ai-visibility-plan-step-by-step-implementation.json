@@ -1,7 +1,0 @@
-{
-  "client_name": "DFY AI Visibility",
-  "article_id": "help-140-ai-schema-ai-visibility-plan",
-  "title": "Schema AI Visibility Plan: Step-by-Step Implementation",
-  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
-  "article": "### Guide\n### Why a Visibility Plan Matters\nSchema AI visibility plan provides a clear framework for structured data deployment and maintenance.\n\n### Implementation Steps\n- Create schema templates for all content types.\n- Host validated JSON/YAML files on public repos.\n- Add entries to your AI sitemap and LLM.txt.\n\n### Outcome\nA defined schema AI visibility plan helps ensure consistent AI recognition and assistant-level authority."
-}

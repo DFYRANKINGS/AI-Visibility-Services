@@ -1,7 +1,0 @@
-{
-  "client_name": "DFY AI Visibility",
-  "article_id": "help-110-ai-schema-automation",
-  "title": "Schema Automation: Updating Data Without Manual Labor",
-  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
-  "article": "### Guide\n### Why Automate Schema\nSchema automation saves time and reduces errors by scheduling updates and validations automatically.\n\n### How to Automate\n- Use GitHub Actions or Zapier workflows.\n- Regenerate JSON/YAML files on schedule.\n- Send pings to AI search APIs after each update.\n\n### The Benefit\nWith schema automation, you maintain freshness effortlessly while improving assistant reliability."
-}

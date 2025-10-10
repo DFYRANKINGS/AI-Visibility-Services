@@ -1,7 +1,0 @@
-{
-  "client_name": "DFY AI Visibility",
-  "article_id": "help-70-ai-json-vs-yaml",
-  "title": "JSON vs YAML: Which Format Do AI Assistants Prefer?",
-  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
-  "article": "### Guide\n### The Basics\nJSON vs YAML are the two main formats AI models read for structured data. Both are valid, but their use depends on the project and repository setup.\n\n### When to Use Each\n- JSON: Best for automated systems and APIs.\n- YAML: Better for readability and manual updates.\n- Always host both to maximize AI compatibility.\n\n### Best Practice\nProvide dual formats in your AI sitemap so assistants never miss critical information."
-}

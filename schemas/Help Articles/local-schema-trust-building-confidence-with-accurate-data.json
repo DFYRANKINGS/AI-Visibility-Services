@@ -1,7 +1,0 @@
-{
-  "client_name": "DFY AI Visibility",
-  "article_id": "help-210-ai-schema-ai-schema-local-schema-trust",
-  "title": "Local Schema Trust: Building Confidence With Accurate Data",
-  "article_type (Guide, Case Study, FAQ Expansion, News, etc.)": "Guide",
-  "article": "### Guide\n### Why Local Schema Trust Matters\nLocal schema trust determines whether assistants consider your regional information authoritative.\n\n### How to Build It\n- Maintain correct NAP data across all branches.\n- Link LocalBusiness schema to reviews and services.\n- Validate quarterly for freshness.\n\n### Payoff\nImproved local schema trust means more consistent local mentions and higher AI-driven exposure."
-}
