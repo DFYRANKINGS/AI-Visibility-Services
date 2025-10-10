@@ -1,4 +1,0 @@
-{
-  "question": "How do I check if my schema works?",
-  "answer": "You can test it with schema validators or rely on automated monitoring."
-}

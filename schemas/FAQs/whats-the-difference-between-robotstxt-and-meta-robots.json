@@ -1,4 +1,0 @@
-{
-  "question": "What’s the difference between robots.txt and meta robots?",
-  "answer": "Robots.txt works site-wide, while meta robots work on a page level."
-}

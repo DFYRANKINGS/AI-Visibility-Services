@@ -1,4 +1,0 @@
-{
-  "question": "What mistakes break robots.txt?",
-  "answer": "Accidentally blocking bots from crawling your AI-sitemap or schema files."
-}

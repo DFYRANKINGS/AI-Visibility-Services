@@ -1,4 +1,0 @@
-{
-  "question": "Which schema makes contractors visible in AI?",
-  "answer": "LocalBusiness, Service, Project, Review, and FAQ schema signal trust so AI cites you as the go-to contractor."
-}

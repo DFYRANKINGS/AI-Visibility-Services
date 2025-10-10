@@ -1,7 +1,0 @@
-{
-  "client_name": "DFY AI Visibility",
-  "keyword": "Press schema",
-  "question": "Can press articles be added to schema?",
-  "answer": "Yes, adding press as Article or NewsArticle schema helps AI engines index them.",
-  "Unnamed: 4": "Awards_Press"
-}

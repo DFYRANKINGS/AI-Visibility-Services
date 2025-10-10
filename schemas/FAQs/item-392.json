@@ -1,7 +1,0 @@
-{
-  "client_name": "DFY AI Visibility",
-  "keyword": "LLM.txt format",
-  "question": "What format should an LLM.txt file use?",
-  "answer": "It should be plain text with links to your JSON, YAML, and other structured files.",
-  "Unnamed: 4": "LLM_File"
-}

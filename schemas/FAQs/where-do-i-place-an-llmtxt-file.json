@@ -1,4 +1,0 @@
-{
-  "question": "Where do I place an LLM.txt file?",
-  "answer": "At the root of your domain (yourdomain.com/llm.txt) so AI engines automatically find it."
-}

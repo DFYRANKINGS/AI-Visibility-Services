@@ -1,7 +1,0 @@
-{
-  "client_name": "DFY AI Visibility",
-  "keyword": "Robots errors",
-  "question": "Can a bad robots.txt block AI?",
-  "answer": "Yes, blocking schema or sitemaps in robots.txt prevents AI from crawling your data.",
-  "Unnamed: 4": "Errors"
-}

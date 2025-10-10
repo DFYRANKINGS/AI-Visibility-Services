@@ -1,7 +1,0 @@
-{
-  "client_name": "DFY AI Visibility",
-  "keyword": "JSON location",
-  "question": "Where should I publish JSON files?",
-  "answer": "On a public URL so AI crawlers can access them, typically in a structured /data or /schema folder.",
-  "Unnamed: 4": "JSON_YAML"
-}

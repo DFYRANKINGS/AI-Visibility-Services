@@ -1,4 +1,0 @@
-{
-  "question": "What’s the difference between JSON and YAML?",
-  "answer": "Both describe structured data. JSON is more common, while YAML is human-friendly but equally useful for AI."
-}

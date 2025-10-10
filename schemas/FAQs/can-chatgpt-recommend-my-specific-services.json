@@ -1,4 +1,0 @@
-{
-  "question": "Can ChatGPT recommend my specific services?",
-  "answer": "Yes. When your service descriptions are structured in JSON, YAML, and schema, ChatGPT cites them in answers."
-}

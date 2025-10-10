@@ -1,4 +1,0 @@
-{
-  "question": "Why does AI ignore my data when I use placeholders?",
-  "answer": "AI engines don’t trust placeholder text like “example.com” or “lorem ipsum.” It must be real data."
-}
